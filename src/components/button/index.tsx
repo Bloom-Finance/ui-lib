@@ -22,6 +22,8 @@ interface ButtonProps {
      * Optional click handler
      */
     onClick?: MouseEventHandler<HTMLButtonElement>
+
+    children: JSX.Element
 }
 export const Button = ({
     primary = false,
