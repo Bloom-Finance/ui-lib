@@ -23,7 +23,7 @@ interface ButtonProps {
      */
     onClick?: MouseEventHandler<HTMLButtonElement>
 
-    children: JSX.Element
+
 }
 export const Button = ({
     primary = false,
@@ -32,7 +32,7 @@ export const Button = ({
     label,
     ...props
 }: ButtonProps) => {
-    return <button className="btn btn-primary">Un boton</button>
+    return <button className="btn btn-primary">{label}</button>
 }
 
 export default Button
