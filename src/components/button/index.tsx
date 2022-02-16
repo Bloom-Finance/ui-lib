@@ -2,37 +2,34 @@ import { MouseEventHandler } from 'react'
 import React, { FC } from 'react'
 
 interface ButtonProps {
-    /**
-     * Is this the principal call to action on the page?
-     */
-    primary?: boolean
-    /**
-     * What background color to use
-     */
-    backgroundColor?: string
-    /**
-     * How large should the button be?
-     */
-    size?: 'small' | 'medium' | 'large'
-    /**
-     * Button contents
-     */
+    type?: 'primary' | 'secondary'
+    disabled?: boolean
     label: string
-    /**
-     * Optional click handler
-     */
+    icon?: JSX.Element
     onClick?: MouseEventHandler<HTMLButtonElement>
-
-
 }
 export const Button = ({
-    primary = false,
-    size = 'medium',
-    backgroundColor,
+    type = 'primary',
+    disabled = false,
     label,
+    icon = <div></div>,
     ...props
 }: ButtonProps) => {
-    return <button className="btn btn-primary">{label}</button>
+    let classNameBase = 'text-lg font-semibold rounded-lg p-4 w-full flex items-center justify-center'
+    classNameBase =
+        classNameBase +
+        (type === 'primary'
+            ? ' bg-black text-white'
+            : ' bg-white text-black border border-gray-300')
+    classNameBase = classNameBase + (disabled ? ' opacity-50' : '')
+    return (
+        <button className={classNameBase}>
+            <div>
+                <span>{icon}</span>
+                <span>{label}</span>
+            </div>
+        </button>
+    )
 }
 
 export default Button
