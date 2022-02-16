@@ -54,7 +54,7 @@ export const BottomPanelLogin: React.FC = () => {
                                 successfullyConnected={connect}
                                 handleError={errorHandler}
                             >
-                                <div className="border border-gray-300 rounded-lg p-4 capitalize cursor-pointer text-lg font-semibold w-full flex items-center justify-center">
+                                <div className="border border-gray-300 rounded-lg p-4 cursor-pointer text-lg font-semibold w-full flex items-center justify-center">
                                     <span className="mr-3">
                                         <LogoButton />
                                     </span>

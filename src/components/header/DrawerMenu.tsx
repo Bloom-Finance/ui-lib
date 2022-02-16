@@ -19,36 +19,35 @@ const DrawerMenu = (): JSX.Element => {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer" className="drawer-overlay  "></label>
-                <ul className="menu overflow-y-auto w-80 left-0 bg-base-100 text-base-content h-screen absolute top-0 ">
+                <ul className="menu overflow-y-auto w-10/12 left-0 bg-base-100 text-base-content h-screen absolute top-0 ">
                     <li>
                         <WalletStatus
                             wallet="MetaMask"
-                            idWallet="4234234234234234234"
-                            walletIcon={<Icon type={'CLOCK'} stroke={1} />}
+                            idWallet="0x900e7b5Cc2FB268..."
+                            walletIcon={<Icon type={'metamask'} stroke={1} />}
                         />
                     </li>
-                    <li className="border-b p-4  border-slate-500 ">
+                    <li className="border-b border-t border-gray-200 px-6 py-6">
                         <AuthUser
                             email="leenen.maria@gmail.com"
                             userName="Leenen Maria Noel"
                         />
                     </li>
-
-                    <li>
+                    <li className="pt-4 px-1">
                         <a>
-                            <span className="mr-2">
+                            <span className="mr-3">
                                 <SettingsIcon />
                             </span>
                             Account settings
                         </a>
                     </li>
-                    <li>
+                    <li className="px-1">
                         <a
                             onClick={() => {
                                 router.push('/profile/logout')
                             }}
                         >
-                            <span className="mr-2">
+                            <span className="mr-3">
                                 <LogoutIcon />
                             </span>
                             Logout
@@ -56,8 +55,11 @@ const DrawerMenu = (): JSX.Element => {
                     </li>
                     <li>
                         <a>
-                            <label htmlFor="my-drawer">
-                                <CloseIcon /> Close
+                            <label htmlFor="my-drawer" className="w-full">
+                                <label className="mr-3">
+                                    <CloseIcon />
+                                </label>
+                                Close menu
                             </label>
                         </a>
                     </li>

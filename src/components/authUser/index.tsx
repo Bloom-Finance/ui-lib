@@ -8,11 +8,11 @@ interface Props {
 
 const Component = (props: Props): JSX.Element => {
     return (
-        <div className="avatar">
+        <div className="flex items-center gap-x-4">
             <Avatar />
             <div>
-                <h2 className=" mt-1 text-gray-900">{props.userName}</h2>
-                <h4 className=" text-gray-600">{props.email}</h4>
+                <h2 className="text-gray-900 text-base font-semibold">{props.userName}</h2>
+                <h4 className="text-sm text-gray-500">{props.email}</h4>
             </div>
         </div>
     )
