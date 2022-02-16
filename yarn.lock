@@ -2518,6 +2518,11 @@
   "resolved" "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
   "version" "0.0.29"
 
+"@types/lunr@^2.3.4":
+  "integrity" "sha512-j4x4XJwZvorEUbA519VdQ5b9AOU9TSvfi8tvxMAfP8XzNLtFex7A8vFQwqOx3WACbV0KMXbACV3cZl4/gynQ7g=="
+  "resolved" "https://registry.npmjs.org/@types/lunr/-/lunr-2.3.4.tgz"
+  "version" "2.3.4"
+
 "@types/mdast@^3.0.0":
   "integrity" "sha512-W864tg/Osz1+9f4lrGTZpCSO5/z4608eUp19tbozkq2HJK6i3z1kT0H9tlADXuYIb1YYOBByU4Jsqkk75q48qA=="
   "resolved" "https://registry.npmjs.org/@types/mdast/-/mdast-3.0.10.tgz"
@@ -7285,7 +7290,7 @@
   dependencies:
     "p-locate" "^5.0.0"
 
-"lodash.debounce@^4.0.8":
+"lodash.debounce@^4", "lodash.debounce@^4.0.8":
   "integrity" "sha1-gteb/zCmfEAF/9XiUVMArZyk168="
   "resolved" "https://registry.npmjs.org/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
   "version" "4.0.8"
@@ -7350,6 +7355,11 @@
   "version" "6.0.0"
   dependencies:
     "yallist" "^4.0.0"
+
+"lunr@^2.3.9":
+  "integrity" "sha512-zTU3DaZaF3Rt9rhN3uBMGQD3dD2/vFQqnvZCDv4dl5iOzq2IZQqTxu90r4E5J+nP70J3ilqVCrbho2eWaeW8Ow=="
+  "resolved" "https://registry.npmjs.org/lunr/-/lunr-2.3.9.tgz"
+  "version" "2.3.9"
 
 "lz-string@^1.4.4":
   "integrity" "sha1-wNjq82BZ9wV5bh40SBHPTEmNOiY="
@@ -8863,6 +8873,14 @@
   "resolved" "https://registry.npmjs.org/react-countdown-circle-timer/-/react-countdown-circle-timer-3.0.8.tgz"
   "version" "3.0.8"
 
+"react-debounce-input@^3.2.5":
+  "integrity" "sha512-WDc9nvZ8E/cT4nW1RlD/r+Nsc5Z5+Jmj2v9HT9RzsPtxkwRTQUBCKJvdt1fCYy5ME/nQPoqVYmWUWSv7whGmig=="
+  "resolved" "https://registry.npmjs.org/react-debounce-input/-/react-debounce-input-3.2.5.tgz"
+  "version" "3.2.5"
+  dependencies:
+    "lodash.debounce" "^4"
+    "prop-types" "^15.7.2"
+
 "react-docgen-typescript@^2.0.0":
   "integrity" "sha512-tvg2ZtOpOi6QDwsb3GZhOjDkkX0h8Z2gipvTg6OVMUyoYoURhEiRNePT8NZItTVCDh39JJHnLdfCOkzoLbFnTg=="
   "resolved" "https://registry.npmjs.org/react-docgen-typescript/-/react-docgen-typescript-2.2.2.tgz"
@@ -9022,7 +9040,7 @@
     "use-composed-ref" "^1.0.0"
     "use-latest" "^1.0.0"
 
-"react@^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1", "react@^16.13.1 || ^17.0.0", "react@^16.6.0 || ^17.0.0", "react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^16.8.4 || ^17.0.0", "react@^17.0.2", "react@^17.0.2 || ^18.0.0-0", "react@>= 0.14.0", "react@>= 16.3.0", "react@>= 16.8.0 || 17.x.x || 18.x.x", "react@>=16.12.0", "react@>=16.3.0", "react@>=16.8", "react@>=16.8.0", "react@17.0.2":
+"react@^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1", "react@^15.3.0 || ^16.0.0 || ^17.0.0", "react@^16.13.1 || ^17.0.0", "react@^16.6.0 || ^17.0.0", "react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^16.8.4 || ^17.0.0", "react@^17.0.2", "react@^17.0.2 || ^18.0.0-0", "react@>= 0.14.0", "react@>= 16.3.0", "react@>= 16.8.0 || 17.x.x || 18.x.x", "react@>=16.12.0", "react@>=16.3.0", "react@>=16.8", "react@>=16.8.0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
