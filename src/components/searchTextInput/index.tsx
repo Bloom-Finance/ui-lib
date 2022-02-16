@@ -33,7 +33,7 @@ const Component = (props: Props): JSX.Element => {
     }
 
     return (
-        <div>
+        <div className="w-full flex-1">
             {!showTextSearch && (
                 <div
                     onClick={() => {
@@ -49,14 +49,14 @@ const Component = (props: Props): JSX.Element => {
             {showTextSearch && (
                 <div>
                     <div className="form-control">
-                        <div className="flex">
+                        <div className="flex w-full">
                             <DebounceInput
                                 type="text"
                                 onChange={event =>
                                     filterList(event.target.value)
                                 }
-                                placeholder="Name"
-                                className="input input-bordered"
+                                placeholder="Search by order description"
+                                className="w-full focus:outline-none"
                             />
                             <div
                                 className="cursor-pointer"
