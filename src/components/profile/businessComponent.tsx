@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { useRouter } from 'next/router'
-import MerchantStore from '../../store/merchant.store'
+import MerchantStore from '../../../../store/merchant.store'
 import WalletGuard from '../wallet/walletGuard'
 import InputText from '../input/inputText'
 import SelectIcon from '../select/selectIcon'
