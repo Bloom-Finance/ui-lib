@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import { useRouter } from 'next/router'
-import { UsersManager } from '../../../services/users.service'
+import { UsersManager } from '../../../../../services/users.service'
 import WalletConnection from '../../wallet/walletConnection'
 import Moralis from 'moralis/types'
-import StateStore from '../../../store/state.store'
-import { setToken, encodeToken, getToken } from '../../../services/auth.service'
+import StateStore from '../../../../../store/state.store'
+import { setToken, encodeToken, getToken } from '../../../../../services/auth.service'
 export const BottomPanelLogin: React.FC = () => {
     const router = useRouter()
     const userManager = new UsersManager()
@@ -54,7 +54,7 @@ export const BottomPanelLogin: React.FC = () => {
                                 successfullyConnected={connect}
                                 handleError={errorHandler}
                             >
-                                <div className="border border-gray-300 rounded-lg p-4 capitalize cursor-pointer text-lg font-semibold w-full flex items-center justify-center">
+                                <div className="border border-gray-300 rounded-lg p-4 cursor-pointer text-lg font-semibold w-full flex items-center justify-center">
                                     <span className="mr-3">
                                         <LogoButton />
                                     </span>

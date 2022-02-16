@@ -12,6 +12,8 @@ interface Props {
         | 'white'
         | 'gray-400'
         | 'gray-700'
+        | 'gray-900'
+    weight?: 'semibold' | 'bold'
     className?: string
     onClick?: (event: any) => void
     clickable?: boolean
@@ -31,15 +33,25 @@ const Component = (props: Props): JSX.Element => {
                 return 'text-white'
             case 'gray-500':
                 return 'text-gray-500'
-
             case 'gray-400':
                 return 'text-gray-400'
             case 'gray-600':
                 return 'text-gray-600'
             case 'gray-700':
                 return 'text-gray-700'
+            case 'gray-900':
+                return 'text-gray-900'
             default:
                 return 'text-gray-800'
+        }
+    }
+
+    const getWeight = () => {
+        switch (props.weight) {
+            case 'semibold':
+                return 'font-semibold'
+            case 'bold':
+                return 'font-bold'
         }
     }
 
@@ -73,7 +85,7 @@ const Component = (props: Props): JSX.Element => {
             onClick={props.onClick}
             className={`${
                 props.className
-            } ${getSize()} ${getColor()} ${getTextAlign()}  ${
+            } ${getSize()} ${getColor()} ${getWeight()} ${getTextAlign()}  ${
                 props.clickable && 'cursor-pointer'
             }`}
         >

@@ -6,7 +6,7 @@ interface Props {
 
 const Component = (props: Props) => {
     return (
-        <div className="bg-white  border-b  border-slate-500  top-0 w-full">
+        <div className="bg-white border-b border-slate-500 top-0 w-full">
             {props.children}
         </div>
     )

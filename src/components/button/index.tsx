@@ -15,7 +15,8 @@ export const Button = ({
     icon = <div></div>,
     ...props
 }: ButtonProps) => {
-    let classNameBase = 'text-lg font-semibold rounded-lg p-4 w-full flex items-center justify-center'
+    let classNameBase =
+        'text-lg font-semibold rounded-lg p-4 w-full flex items-center justify-center gap-x-2'
     classNameBase =
         classNameBase +
         (type === 'primary'
@@ -23,11 +24,9 @@ export const Button = ({
             : ' bg-white text-black border border-gray-300')
     classNameBase = classNameBase + (disabled ? ' opacity-50' : '')
     return (
-        <button className={classNameBase}>
-            <div>
-                <span>{icon}</span>
-                <span>{label}</span>
-            </div>
+        <button onClick={props.onClick} className={classNameBase}>
+            <p>{icon}</p>
+            <p>{label}</p>
         </button>
     )
 }

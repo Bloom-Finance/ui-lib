@@ -51,6 +51,10 @@
   "dependencies": {
     "@storybook/addon-docs": "^6.4.19",
     "daisyui": "^1.25.4",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-countdown-circle-timer": "^3.0.6",
+    "@types/lunr": "^2.3.4",
+    "lunr": "^2.3.9",
+    "react-debounce-input": "^3.2.5"
   }
 }

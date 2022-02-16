@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import MerchantStore from '../../store/merchant.store'
-import { firebaseManager } from '../../services/firebase.services'
+import MerchantStore from '../../../../store/merchant.store'
+import { firebaseManager } from '../../../../services/firebase.services'
 import { useEffect } from 'react'
 
 interface FileUploadProps {
