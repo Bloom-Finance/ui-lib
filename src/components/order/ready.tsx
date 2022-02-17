@@ -29,6 +29,22 @@ const Page: NextPage = () => {
             >
                 {({ remainingTime }) => remainingTime}
             </CountdownCircleTimer>
+            <Container type="row" justify="center">
+                <div
+                    className="flex"
+                    onClick={() => {
+                        if (navigator.share) {
+                            navigator.share({
+                                title: 'Sample test',
+                                url: 'google.com'
+                            })
+                        }
+                    }}
+                >
+                    <Icon className="pr-4" type="upload" stroke={1}></Icon>
+                    <div>Share Link</div>
+                </div>
+            </Container>
         </Container>
     )
 }
