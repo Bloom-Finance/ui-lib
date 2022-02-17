@@ -2,7 +2,7 @@ import { MouseEventHandler } from 'react'
 import React, { FC } from 'react'
 
 interface ButtonProps {
-    type?: 'primary' | 'secondary'
+    type?: 'primary' | 'secondary' | 'warning'
     disabled?: boolean
     label: string
     icon?: JSX.Element
