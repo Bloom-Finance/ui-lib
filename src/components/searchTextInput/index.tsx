@@ -28,7 +28,6 @@ const Component = (props: Props): JSX.Element => {
         const finalResult = props.list.filter(l =>
             _.includes(patterSearchResult, l.id)
         )
-        console.log(props.list)
         props.updateListFunction(finalResult)
     }
 

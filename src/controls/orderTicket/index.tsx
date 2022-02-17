@@ -6,17 +6,15 @@ import Button from '../../components/button'
 
 interface Props {
     status: 'completed' | 'pending' | 'cancelled'
-
     icon?: any
     footer?: JSX.Element
-
-    currencyAmount?: string
+    currencyAmount?: number
     currencyDescription?: string
     currencyType?: string
     description?: string
-    ticketDate?: number
+    ticketDate?: string
     ticketNumber?: string
-    criptoAmount?: string
+    criptoAmount?: number
     criptoIcon?: any
     user?: string
     walletIcon?: any
@@ -125,7 +123,6 @@ const Component = (props: Props): JSX.Element => {
                         {props.status === 'completed' ? (
                             <Button
                                 label="Download Receippt"
-                                className="mt-4 mb-4"
                                 icon={<Icon type="DOWNLOAD" stroke={2} />}
                             />
                         ) : (
