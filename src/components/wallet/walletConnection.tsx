@@ -2,7 +2,7 @@
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import React, { useEffect } from 'react'
 import { useMoralis } from 'react-moralis'
-import { WalletManager } from '../../../../services/wallet.service'
+import { WalletManager } from '../../../../core-lib/services/wallet.service'
 interface activeProvider {
     provider?: WalletConnectProvider
 }
