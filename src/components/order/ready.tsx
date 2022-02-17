@@ -12,10 +12,7 @@ import QRCode from 'react-qr-code'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import Timer from '../timer'
 
-interface ReadyProps {
-    footer?: any
-}
-const ReadyProps = (props: ReadyProps) => {
+const Page: NextPage = () => {
     const router = useRouter()
     return (
         <Container type="row" justify="center">
@@ -48,10 +45,8 @@ const ReadyProps = (props: ReadyProps) => {
                     <div>Share Link</div>
                 </div>
             </Container>
-
-            <Footer>{props.footer}</Footer>
         </Container>
     )
 }
 
-export default ReadyProps
+export default Page
