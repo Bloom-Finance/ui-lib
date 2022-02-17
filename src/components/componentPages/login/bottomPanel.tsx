@@ -1,66 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import { useRouter } from 'next/router'
-import { UsersManager } from '../../../../../services/users.service'
-import WalletConnection from '../../wallet/walletConnection'
-import Moralis from 'moralis/types'
-import StateStore from '../../../../../store/state.store'
-import { setToken, encodeToken, getToken } from '../../../../../services/auth.service'
 export const BottomPanelLogin: React.FC = () => {
     const router = useRouter()
-    const userManager = new UsersManager()
-    const connect = (user: Moralis.User<Moralis.Attributes>) => {
-        const wallet_address = user.attributes.accounts[0]
-        StateStore.update(s => {
-            s.loading = true
-        })
-        userManager
-            .get(wallet_address)
-            .then(async user => {
-                if (user && user.merchants) {
-                    StateStore.update(s => {
-                        s.loading = false
-                    })
-                    const userToken = {
-                        ...user,
-                        merchants: [
-                            {
-                                role: user.merchants[0].role,
-                                merchant: user.merchants[0].merchant.id
-                            }
-                        ]
-                    }
-                    const token = encodeToken(userToken)
-                    setToken(token)
-                    router.push('/dashboard')
-                } else {
-                    router.push('/profile/create/business')
-                }
-            })
-            .catch(err => {
-                throw new Error(err.message)
-            })
-    }
-    const errorHandler = (err: Error) => {
-        console.error(err.message)
-    }
     return (
         <div>
             <div className="drawer ">
                 <div className="fixed bottom-0 w-full">
                     <ul className="menu py-6 px-8 w-full text-base-content rounded-tl-xl rounded-tr-xl shadow-2xl bg-white">
                         <li>
-                            <WalletConnection
-                                successfullyConnected={connect}
-                                handleError={errorHandler}
-                            >
-                                <div className="border border-gray-300 rounded-lg p-4 cursor-pointer text-lg font-semibold w-full flex items-center justify-center">
-                                    <span className="mr-3">
-                                        <LogoButton />
-                                    </span>
-                                    Continue with WalletConnect
-                                </div>
-                            </WalletConnection>
+                            <div className="border border-gray-300 rounded-lg p-4 cursor-pointer text-lg font-semibold w-full flex items-center justify-center">
+                                <span className="mr-3">
+                                    <LogoButton />
+                                </span>
+                                Continue with WalletConnect
+                            </div>
                         </li>
                     </ul>
                 </div>
