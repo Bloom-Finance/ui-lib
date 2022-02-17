@@ -13,6 +13,7 @@ interface Props {
         | 'SUCCESS'
         | 'X-CIRCLE'
         | 'metamask'
+        | 'X'
     stroke: 1 | 2 | 3
     color?: string
     className?: string
@@ -411,6 +412,23 @@ const Component = (props: Props): JSX.Element => {
                             strokeLinejoin="round"
                             strokeWidth={props.stroke}
                             d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                    </svg>
+                )
+            case 'X':
+                return (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke={props.color || 'currentColor'}
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={props.stroke}
+                            d="M6 18L18 6M6 6l12 12"
                         />
                     </svg>
                 )
