@@ -15,12 +15,12 @@ export const Alert = ({
     let getSize = () => {
         switch (status) {
             case 'warning':
-                return 'text-3xl'
+                return 'bg-yellow'
             case 'error':
-                return 'text-2xl'
+                return 'bg-red-600'
 
             default:
-                return 'text-base'
+                return 'bg-black'
         }
     }
 
