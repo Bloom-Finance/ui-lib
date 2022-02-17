@@ -13,6 +13,7 @@ interface Props {
         | 'gray-400'
         | 'gray-700'
         | 'gray-900'
+        | 'yellow-500'
     weight?: 'semibold' | 'bold'
     className?: string
     onClick?: (event: any) => void
@@ -41,6 +42,8 @@ const Component = (props: Props): JSX.Element => {
                 return 'text-gray-700'
             case 'gray-900':
                 return 'text-gray-900'
+            case 'yellow-500':
+                return 'text-yellow-500'
             default:
                 return 'text-gray-800'
         }

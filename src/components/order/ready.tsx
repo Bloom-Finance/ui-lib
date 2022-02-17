@@ -16,8 +16,8 @@ const Page: NextPage = () => {
     const router = useRouter()
     return (
         <Container type="row" justify="center">
-            <Label className="px-12">Show this QR code to your customer</Label>
-            <QRCode className="mt-8 mb-8" value="https://google.com" />
+            <Label className="px-12 pt-2" color="gray-500">Show this QR code to your customer</Label>
+            <QRCode className="mt-4 mb-16" value="https://google.com" />
 
             <CountdownCircleTimer
                 isPlaying
@@ -29,7 +29,7 @@ const Page: NextPage = () => {
             >
                 {({ remainingTime }) => remainingTime}
             </CountdownCircleTimer>
-            <Container type="row" justify="center">
+            <div className="flex justify-center pt-8">
                 <div
                     className="flex"
                     onClick={() => {
@@ -41,10 +41,10 @@ const Page: NextPage = () => {
                         }
                     }}
                 >
-                    <Icon className="pr-4" type="upload" stroke={1}></Icon>
+                    <Icon className="pr-2" type="upload" stroke={1}></Icon>
                     <div>Share Link</div>
                 </div>
-            </Container>
+            </div>
         </Container>
     )
 }
