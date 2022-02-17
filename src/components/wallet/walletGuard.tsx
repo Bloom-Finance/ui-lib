@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useMoralis } from 'react-moralis'
-import { getToken } from '../../../../services/auth.service'
+import { getToken } from '../../../../core-lib/services/auth.service'
 import Loader from '../loader/index'
 import StateStore from '../../../../store/state.store'
 import Moralis from 'moralis'
