@@ -13,6 +13,7 @@ interface Props {
         | 'SUCCESS'
         | 'X-CIRCLE'
         | 'metamask'
+        | 'X'
     stroke: 1 | 2 | 3
     color?: string
     className?: string
