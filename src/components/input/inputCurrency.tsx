@@ -10,14 +10,15 @@ interface Props {
         onChange: ChangeEventHandler<HTMLInputElement>
         ref: LegacyRef<HTMLInputElement>
     }
+    autoFocus?: boolean
 }
-
 const InputCurrency = (props: Props): JSX.Element => {
     return (
         <div className={`${props.className}`}>
             <div className="stat place-items-center place-content-center">
                 <div className="stat-value flex font-normal ">
                     <input
+                        autoFocus={props.autoFocus || false}
                         type="number"
                         ref={props.controller?.ref}
                         onChange={props.controller?.onChange}
