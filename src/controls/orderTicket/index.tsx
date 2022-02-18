@@ -47,14 +47,16 @@ export const Component = ({
         }
     }
     return (
-        <div className="mx-4 my-4 bg-white">
+        <div className="mx-4 my-4 bg-white rounded-t-lg text-center ">
             <div
                 className={` ${
                     status === 'completed' && 'bg-green-600 rounded-t-lg  p-4'
                 } 
-                ${status === 'cancelled' && 'bg-red-600 rounded-t-lg  p-4'}`}
+                ${status === 'cancelled' && 'bg-red-600 rounded-t-lg  p-4'} ${
+                    status === 'pending' && 'bg-yellow-600 rounded-t-lg  p-4'
+                }`}
             >
-                <div className="h-12 m-auto">
+                <div className="h-12 m-auto text-center">
                     {status === 'cancelled' && (
                         <Icon
                             type={'X-CIRCLE'}
@@ -71,78 +73,89 @@ export const Component = ({
                             color="white"
                         />
                     )}
+                    {status === 'pending' && (
+                        <Icon
+                            type={'X'}
+                            stroke={1}
+                            className="m-auto h-12"
+                            color="white"
+                        />
+                    )}
                 </div>
 
-                <Label align="center" color="white">
+                <div className="text-center text-white text-base font-semibold">
                     {status === 'completed' && ` Payment received successfully`}
+                    {status === 'pending' && ` The order has been Pending `}
                     {status === 'cancelled' && `The order has been cancelled`}
-                </Label>
-                <Label type="small" color="white">
+                </div>
+                <div className="text-sm text-white text-center">
                     {status === 'completed' && `Receipt number `}
                     {ticketNumber}
-                </Label>
-                <Label type="small" color="white">
+                </div>
+                <div className="text-sm text-white text-center">
                     {status === 'completed' && `Payed on `}
                     {status === 'cancelled' && `Order date `}
                     {moment(ticketDate).format(
                         FormatterManager.getFormatDate()
                     )}
-                </Label>
+                </div>
             </div>
             <div className=" rounded-lg">
                 <Container type={'row'} justify={'strech'}>
-                    <Label color="gray-400">{currencyDescription}</Label>
-                    <Container type="column" justify={'center'}>
-                        <Label color="gray-700" type="xl">
+                    <div className="text-base text-gray-400 text-center">
+                        {currencyDescription}
+                    </div>
+                    <div className="container px-8 py-2 mx-auto items-center undefined flex justify-center">
+                        <div className="text-xl text-gray-700 text-center">
                             {criptoAmount}
-                        </Label>
+                        </div>
                         {criptoIcon}
-                    </Container>
+                    </div>
 
                     <div className=" mx-auto items-center  flex justify-center">
-                        <Label color="gray-400">
+                        <div className="text-sm text-center text-gray-400 ">
                             {FormatterManager.formatCurrency(
                                 currencyAmount as number,
                                 currencyType as string
                             )}
-                        </Label>
+                        </div>
                     </div>
                 </Container>
                 <div className="border-gray-100  border-t p-4">
-                    <Label>{description}</Label>
+                    <div className="text-base text-regular text-gray-900">
+                        {description}
+                    </div>
                 </div>
                 {status === 'completed' ? (
                     <div className={`border-gray-100  border-t py-4`}>
-                        <Label color="gray-500">
+                        <div className="text-sm text-gray-400 px-4">
                             You received this payment in your wallet
-                        </Label>
+                        </div>
                         <div className="container px-8  mx-auto items-center flex justify-center">
                             {walletIcon}
 
-                            <Label align="left" className="font-bold pl-2">
+                            <div className="text-sm text-regular text-gray-900 px-4">
                                 {walletAddress}
-                            </Label>
+                            </div>
                         </div>
                     </div>
                 ) : (
                     ''
                 )}
-
-                <div className="border-gray-100 border-dashed border-t ">
-                    <div className="w-6 h-6 absolute rounded-full bg-gray-100 -mt-3   float-right left-2"></div>
-                    <div className="w-6 h-6 absolute rounded-full bg-gray-100 -mt-3  float-right right-2"></div>
-                    <Container type="row" justify={'strech'}>
-                        {status === 'completed' ? (
+                {status === 'completed' ? (
+                    <div className="border-t border-dashed">
+                        <Container type="row" justify={'strech'}>
                             <Button
                                 label="Download Receippt"
                                 icon={<Icon type="DOWNLOAD" stroke={2} />}
                             />
-                        ) : (
-                            ''
-                        )}
-                        {footer}
-                    </Container>
-                </div>
+                        </Container>
+                    </div>
+                ) : (
+                    ''
+                )}
+
+                {footer}
             </div>
         </div>
     )
