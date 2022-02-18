@@ -33,6 +33,7 @@ Completed.args = {
     status:'completed',
     currencyAmount: 15878,
     description: 'Reseva hotel Los Andes',
+    walletAddress: '0x33232341234534'
 }
 
 export const Pending = Template.bind({})
@@ -40,7 +41,7 @@ Pending.args = {
     status:'pending',
     currencyAmount: 30212,
     description: 'Reseva hotel Los Alamos',
-    
+    walletAddress: '0x33232341234534'
 }
 
 export const Cancelled = Template.bind({})
@@ -48,5 +49,5 @@ Cancelled.args = {
     status:'cancelled',
     currencyAmount: 22567,
     description: 'Reseva hotel Los Aromos',
-   
+    walletAddress: '0x33232341234534'
 }
