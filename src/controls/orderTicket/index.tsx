@@ -3,6 +3,8 @@ import Label from '../../components/label'
 import Container from '../../components/container'
 import Icon from '../../components/icon'
 import Button from '../../components/button'
+import { FormatterManager } from '../../../../core-lib/common/helpers/formatter'
+import moment from 'moment'
 
 interface Props {
     status: 'completed' | 'pending' | 'cancelled'
@@ -10,20 +12,32 @@ interface Props {
     footer?: JSX.Element
     currencyAmount?: number
     currencyDescription?: string
-    currencyType?: string
+    currencyType?: 'USD' | 'ARS'
     description?: string
-    ticketDate?: string
+    ticketDate?: number
     ticketNumber?: string
     criptoAmount?: number
     criptoIcon?: any
-    user?: string
     walletIcon?: any
-    idWallet?: string
+    walletAddress?: string
 }
 
-const Component = (props: Props): JSX.Element => {
+export const Component = ({
+    status = 'completed',
+    currencyAmount = 0,
+    currencyDescription = 'USD',
+    currencyType = 'USD',
+    description = '',
+    ticketDate = new Date().getTime(),
+    ticketNumber = '',
+    criptoAmount = 0,
+    criptoIcon = null,
+    walletIcon = null,
+    walletAddress = '',
+    footer = <></>
+}: Props): JSX.Element => {
     const getColor = () => {
-        switch (props.status) {
+        switch (status) {
             case 'completed':
                 return 'bg-green-600'
             case 'pending':
@@ -36,16 +50,12 @@ const Component = (props: Props): JSX.Element => {
         <div className="mx-4 my-4 bg-white">
             <div
                 className={` ${
-                    props.status === 'completed' &&
-                    'bg-green-600 rounded-t-lg  p-4'
+                    status === 'completed' && 'bg-green-600 rounded-t-lg  p-4'
                 } 
-                ${
-                    props.status === 'cancelled' &&
-                    'bg-red-600 rounded-t-lg  p-4'
-                }`}
+                ${status === 'cancelled' && 'bg-red-600 rounded-t-lg  p-4'}`}
             >
                 <div className="h-12 m-auto">
-                    {props.status === 'cancelled' && (
+                    {status === 'cancelled' && (
                         <Icon
                             type={'X-CIRCLE'}
                             stroke={1}
@@ -53,7 +63,7 @@ const Component = (props: Props): JSX.Element => {
                             color="white"
                         />
                     )}
-                    {props.status === 'completed' && (
+                    {status === 'completed' && (
                         <Icon
                             type={'SUCCESS'}
                             stroke={1}
@@ -64,51 +74,53 @@ const Component = (props: Props): JSX.Element => {
                 </div>
 
                 <Label align="center" color="white">
-                    {props.status === 'completed' &&
-                        ` Payment received successfully`}
-                    {props.status === 'cancelled' &&
-                        `The order has been cancelled`}
+                    {status === 'completed' && ` Payment received successfully`}
+                    {status === 'cancelled' && `The order has been cancelled`}
                 </Label>
                 <Label type="small" color="white">
-                    {props.status === 'completed' && `Receipt number `}
-                    {props.ticketNumber}
+                    {status === 'completed' && `Receipt number `}
+                    {ticketNumber}
                 </Label>
                 <Label type="small" color="white">
-                    {props.status === 'completed' && `Payed on`}
-                    {props.status === 'cancelled' && `Order date`}
-                    {props.ticketDate}
+                    {status === 'completed' && `Payed on `}
+                    {status === 'cancelled' && `Order date `}
+                    {moment(ticketDate).format(
+                        FormatterManager.getFormatDate()
+                    )}
                 </Label>
             </div>
             <div className=" rounded-lg">
                 <Container type={'row'} justify={'strech'}>
-                    <Label color="gray-400">{props.currencyDescription}</Label>
+                    <Label color="gray-400">{currencyDescription}</Label>
                     <Container type="column" justify={'center'}>
                         <Label color="gray-700" type="xl">
-                            {props.criptoAmount}
+                            {criptoAmount}
                         </Label>
-                        {props.criptoIcon}
+                        {criptoIcon}
                     </Container>
 
                     <div className=" mx-auto items-center  flex justify-center">
-                        <Label color="gray-400">{props.currencyAmount}</Label>
-                        <span className="text-gray-400 pl-2">
-                            {props.currencyType}
-                        </span>
+                        <Label color="gray-400">
+                            {FormatterManager.formatCurrency(
+                                currencyAmount as number,
+                                currencyType as string
+                            )}
+                        </Label>
                     </div>
                 </Container>
                 <div className="border-gray-100  border-t p-4">
-                    <Label>{props.description}</Label>
+                    <Label>{description}</Label>
                 </div>
-                {props.status === 'completed' ? (
+                {status === 'completed' ? (
                     <div className={`border-gray-100  border-t py-4`}>
                         <Label color="gray-500">
                             You received this payment in your wallet
                         </Label>
                         <div className="container px-8  mx-auto items-center flex justify-center">
-                            {props.walletIcon}
+                            {walletIcon}
 
                             <Label align="left" className="font-bold pl-2">
-                                {props.idWallet}
+                                {walletAddress}
                             </Label>
                         </div>
                     </div>
@@ -120,7 +132,7 @@ const Component = (props: Props): JSX.Element => {
                     <div className="w-6 h-6 absolute rounded-full bg-gray-100 -mt-3   float-right left-2"></div>
                     <div className="w-6 h-6 absolute rounded-full bg-gray-100 -mt-3  float-right right-2"></div>
                     <Container type="row" justify={'strech'}>
-                        {props.status === 'completed' ? (
+                        {status === 'completed' ? (
                             <Button
                                 label="Download Receippt"
                                 icon={<Icon type="DOWNLOAD" stroke={2} />}
@@ -128,7 +140,7 @@ const Component = (props: Props): JSX.Element => {
                         ) : (
                             ''
                         )}
-                        {props.footer}
+                        {footer}
                     </Container>
                 </div>
             </div>

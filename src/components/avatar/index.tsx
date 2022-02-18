@@ -11,7 +11,7 @@ interface Props {
     user?: any
 }
 
-const Component = (props: Props): JSX.Element => {
+export const Component = (props: Props): JSX.Element => {
     return (
         <div className={props.className}>
             <div className="avatar">
