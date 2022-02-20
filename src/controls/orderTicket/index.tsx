@@ -41,7 +41,7 @@ export const Component = ({
             case 'completed':
                 return 'bg-green-600'
             case 'pending':
-                return 'bg-red-500'
+                return 'bg-yellow-500'
             case 'cancelled':
                 return 'bg-red-500'
         }
@@ -53,7 +53,7 @@ export const Component = ({
                     status === 'completed' && 'bg-green-600 rounded-t-lg  p-4'
                 } 
                 ${status === 'cancelled' && 'bg-red-600 rounded-t-lg  p-4'} ${
-                    status === 'pending' && 'bg-yellow-600 rounded-t-lg  p-4'
+                    status === 'pending' && 'bg-yellow-500 rounded-t-lg  p-4'
                 }`}
             >
                 <div className="h-12 m-auto text-center">
@@ -85,11 +85,14 @@ export const Component = ({
 
                 <div className="text-center text-white text-base font-semibold">
                     {status === 'completed' && ` Payment received successfully`}
-                    {status === 'pending' && ` The order has been Pending `}
+                    {status === 'pending' &&
+                        ` There was an error processing your payment. Please try again.`}
                     {status === 'cancelled' && `The order has been cancelled`}
                 </div>
                 <div className="text-sm text-white text-center">
                     {status === 'completed' && `Receipt number `}
+                    {status === 'pending' && `Order number `}
+                    {status === 'cancelled' && `Order number `}
                     {ticketNumber}
                 </div>
                 <div className="text-sm text-white text-center">
@@ -146,6 +149,7 @@ export const Component = ({
                     <div className="border-t border-dashed">
                         <Container type="row" justify={'strech'}>
                             <Button
+                                type="secondary"
                                 label="Download Receippt"
                                 icon={<Icon type="DOWNLOAD" stroke={2} />}
                             />

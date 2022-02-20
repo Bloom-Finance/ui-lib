@@ -15,39 +15,45 @@ export default {
     }
 } as ComponentMeta<typeof OrderTicket>
 
-const Template: ComponentStory<typeof OrderTicket> = args =>  <div className='bg-gray-200 h-screen w-screen items-center justify-center'>
-    <div style={{width: '390px', height: '844px'}}>
-        <SimplePage header={<></>} footer={ <Button label='Continue'/>}>
-            <Container type="row" justify="center"  className="h-4/5 mt-16">
-                <OrderTicket {...args} />
-            </Container>
-        </SimplePage>
+const Template: ComponentStory<typeof OrderTicket> = args => (
+    <div className="bg-gray-200 h-screen w-screen items-center justify-center">
+        <div style={{ width: '390px', height: '844px' }}>
+            <SimplePage header={<></>} footer={<Button label="Continue" />}>
+                <Container type="row" justify="center" className="h-4/5 mt-16">
+                    <OrderTicket {...args} />
+                </Container>
+            </SimplePage>
+        </div>
     </div>
-</div>
-    
-
+)
 
 export const Completed = Template.bind({})
 
 Completed.args = {
-    status:'completed',
+    status: 'completed',
     currencyAmount: 15878,
     description: 'Reseva hotel Los Andes',
-    walletAddress: '0x33232341234534'
+    walletAddress: '0x33232341234534',
+    ticketNumber: '123343',
+    criptoIcon: ''
 }
 
 export const Pending = Template.bind({})
 Pending.args = {
-    status:'pending',
+    status: 'pending',
     currencyAmount: 30212,
     description: 'Reseva hotel Los Alamos',
-    walletAddress: '0x33232341234534'
+    walletAddress: '0x33232341234534',
+    ticketNumber: '123343',
+    criptoIcon: ''
 }
 
 export const Cancelled = Template.bind({})
 Cancelled.args = {
-    status:'cancelled',
+    status: 'cancelled',
     currencyAmount: 22567,
     description: 'Reseva hotel Los Aromos',
-    walletAddress: '0x33232341234534'
+    walletAddress: '0x33232341234534',
+    ticketNumber: '123343',
+    criptoIcon: ''
 }

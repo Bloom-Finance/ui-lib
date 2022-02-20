@@ -12,25 +12,23 @@ export const Alert = ({
     icon = <div></div>,
     ...props
 }: AlertProps) => {
-    let getSize = () => {
+    let getStatus = () => {
         switch (status) {
             case 'warning':
-                return 'bg-yellow'
+                return 'bg-yellow-600 px-4 py-5'
             case 'error':
-                return 'bg-red-600'
-
+                return 'bg-red-600 px-4 py-5'
             default:
-                return 'bg-black'
+                return 'bg-black px-4 py-5'
         }
     }
 
     let classNameBase =
         'mx-auto items-center undefined grid place-items-strech rounded-none text-white px-4 py-5'
-    classNameBase =
-        classNameBase + (status === 'default' ? ' bg-black' : ' bg-red-600')
+    classNameBase = classNameBase + getStatus()
 
     return (
-        <div className={classNameBase}>
+        <div className={`${classNameBase} ${getStatus()} `}>
             <div>{label}</div>
         </div>
     )
