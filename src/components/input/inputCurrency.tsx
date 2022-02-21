@@ -9,6 +9,7 @@ interface Props {
     controller: {
         onChange: ChangeEventHandler<HTMLInputElement>
         ref: LegacyRef<HTMLInputElement>
+        onBlur: React.FocusEventHandler<HTMLInputElement>
     }
     autoFocus?: boolean
 }

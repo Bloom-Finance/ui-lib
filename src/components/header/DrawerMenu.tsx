@@ -5,8 +5,10 @@ import React from 'react'
 import Icon from '../../components/icon'
 import AuthUser from '../authUser'
 import WalletStatus from '../../controls/wallet/status'
-
-const DrawerMenu = (): JSX.Element => {
+interface Props {
+    walletAddress: string
+}
+const DrawerMenu = (props: Props): JSX.Element => {
     return (
         <div className=" drawer h-auto ">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -22,15 +24,8 @@ const DrawerMenu = (): JSX.Element => {
                 <ul className="menu overflow-y-auto w-10/12 left-0 bg-base-100 text-base-content h-screen absolute top-0 ">
                     <li>
                         <WalletStatus
-                            wallet="MetaMask"
-                            idWallet="0x900e7b5Cc2FB268..."
-                            walletIcon={<Icon type={'metamask'} stroke={1} />}
-                        />
-                    </li>
-                    <li className="border-b border-t border-gray-200 px-6 py-6">
-                        <AuthUser
-                            email="leenen.maria@gmail.com"
-                            userName="Leenen Maria Noel"
+                            wallet="Wallet Connect"
+                            idWallet={props.walletAddress}
                         />
                     </li>
                     <li className="pt-4 px-1">
