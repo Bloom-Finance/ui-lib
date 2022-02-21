@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 
 interface Props {
@@ -14,6 +15,9 @@ interface Props {
         | 'X-CIRCLE'
         | 'metamask'
         | 'X'
+        | 'DAI'
+        | 'USDT'
+        | 'ETH'
     stroke: 1 | 2 | 3
     color?: string
     className?: string
@@ -431,6 +435,30 @@ const Component = (props: Props): JSX.Element => {
                             d="M6 18L18 6M6 6l12 12"
                         />
                     </svg>
+                )
+            case 'ETH':
+                return (
+                    <img
+                        src="https://cdn.moralis.io/eth/0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.png"
+                        alt="Ethereum logo"
+                        className="h-6 w-6"
+                    />
+                )
+            case 'DAI':
+                return (
+                    <img
+                        className="h-6 w-6"
+                        src="https://cdn.moralis.io/eth/0x6b175474e89094c44da98b954eedeac495271d0f.png"
+                        alt="DAI logo"
+                    />
+                )
+            case 'USDT':
+                return (
+                    <img
+                        className="h-6 w-6"
+                        src="https://cdn.moralis.io/eth/0xdac17f958d2ee523a2206206994597c13d831ec7.png"
+                        alt="USDT logo"
+                    />
                 )
         }
     }

@@ -15,7 +15,7 @@ export const Button = ({
     icon = <div></div>,
     ...props
 }: ButtonProps) => {
-    let getType = () => {
+    const getType = () => {
         switch (type) {
             case 'primary':
                 return 'bg-black text-white'
@@ -37,8 +37,8 @@ export const Button = ({
             onClick={props.onClick}
             className={`${classNameBase} ${getType()} `}
         >
-            <p>{icon}</p>
-            <p>{label}</p>
+            {icon}
+            {label}
         </button>
     )
 }
