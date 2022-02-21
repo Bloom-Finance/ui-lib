@@ -1,21 +1,27 @@
-import React from 'react'
+import { MouseEventHandler } from 'react'
+import React, { FC } from 'react'
 import Avatar from '../avatar'
 
-interface Props {
+interface AuthUserProps {
     userName?: string
-    email?: string
+    label?: string
+    userEmail?: string
 }
+export const AuthUser = ({ userEmail, userName, ...props }: AuthUserProps) => {
+    let classNameBase = 'flex items-center gap-x-4 '
+    classNameBase = classNameBase
 
-const Component = (props: Props): JSX.Element => {
     return (
-        <div className="flex items-center gap-x-4">
-            <Avatar />
+        <div className={`${classNameBase}  `}>
+            <Avatar label="" />
             <div>
-                <h2 className="text-gray-900 text-base font-semibold">{props.userName}</h2>
-                <h4 className="text-sm text-gray-500">{props.email}</h4>
+                <h2 className="text-gray-900 text-base font-semibold">
+                    {userName}
+                </h2>
+                <h4 className="text-sm text-gray-500">{userEmail}</h4>
             </div>
         </div>
     )
 }
 
-export default Component
+export default AuthUser
