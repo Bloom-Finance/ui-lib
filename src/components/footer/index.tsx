@@ -1,18 +1,16 @@
-import React from 'react'
+import { MouseEventHandler } from 'react'
+import React, { FC } from 'react'
 
-interface Props {
+interface FooterProps {
     children: JSX.Element
     className?: string
 }
+export const Footer = ({ children, ...props }: FooterProps) => {
+    let classNameBase =
+        'fixed bottom-0 w-full p-8 bg-white inset-x-0 border-t border-gray-200 '
+    classNameBase = classNameBase
 
-const Component = (props: Props): JSX.Element => {
-    return (
-        <div
-            className={`fixed bottom-0 w-full p-8 bg-white inset-x-0 border-t border-gray-200 ${props.className}`}
-        >
-            {props.children}
-        </div>
-    )
+    return <div className={`${classNameBase} `}>{children}</div>
 }
 
-export default Component
+export default Footer

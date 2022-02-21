@@ -1,20 +1,21 @@
-import React from 'react'
+import { MouseEventHandler } from 'react'
+import React, { FC } from 'react'
 
-interface Props {
+interface ContainerProps {
     children: any
     type: 'row' | 'column'
     className?: string
     justify?: 'strech' | 'center' | 'end' | 'start' | 'between'
     key?: string
 }
+export const Container = ({ ...props }: ContainerProps) => {
+    let classNameBase = 'container px-8 py-6 mx-auto items-center '
+    classNameBase = classNameBase
 
-const Component = (props: Props): JSX.Element => {
     return (
         <div
             key={props.key}
-            className={`container px-8 py-6 mx-auto items-center ${
-                props.className
-            } ${
+            className={` ${classNameBase} ${props.className} ${
                 props.type === 'column'
                     ? `flex justify-${props.justify}`
                     : `grid place-items-${props.justify}`
@@ -25,4 +26,4 @@ const Component = (props: Props): JSX.Element => {
     )
 }
 
-export default Component
+export default Container
