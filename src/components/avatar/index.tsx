@@ -1,26 +1,34 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react'
-interface Props {
-    className?: string
-    onClick?: React.MouseEventHandler<HTMLButtonElement>
-    label?: string
-    type?: 'submit' | 'reset' | null | 'neutral'
-    disabled?: boolean
-    icon?: any
-    size?: 'small' | 'large'
-    user?: any
-}
+import { MouseEventHandler } from 'react'
+import React, { FC } from 'react'
 
-export const Component = (props: Props): JSX.Element => {
+interface AvatarProps {
+    label: string
+    icon?: JSX.Element
+    className?: string
+    size?: 'small' | 'large'
+    user?: string
+}
+export const Avatar = ({
+    label,
+    user,
+    size,
+    icon = <div></div>,
+    ...props
+}: AvatarProps) => {
+    let classNameBase =
+        'rounded-btn w-12 h-12 bg-gray-900 text-white text-center text-base font-bold text-uppercase shadow  text-white'
+    classNameBase = classNameBase
+
     return (
         <div className={props.className}>
             <div className="avatar">
-                <div className="rounded-btn w-12 h-12 bg-gray-900 text-white text-center text-base font-bold text-uppercase shadow">
-                    <div className="py-3">LM</div>
+                <div className={classNameBase}>
+                    <div className="py-3">{user}</div>
                 </div>
             </div>
         </div>
     )
 }
 
-export default Component
+export default Avatar

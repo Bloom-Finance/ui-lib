@@ -15,7 +15,7 @@ export const Alert = ({
     let getStatus = () => {
         switch (status) {
             case 'warning':
-                return 'bg-yellow-600 px-4 py-5'
+                return 'bg-yellow-500 px-4 py-5'
             case 'error':
                 return 'bg-red-600 px-4 py-5'
             default:
@@ -24,12 +24,13 @@ export const Alert = ({
     }
 
     let classNameBase =
-        'mx-auto items-center undefined grid place-items-strech rounded-none text-white px-4 py-5'
+        'mx-auto items-center flex justify-between rounded-none text-white px-4 py-5 '
     classNameBase = classNameBase + getStatus()
 
     return (
         <div className={`${classNameBase} ${getStatus()} `}>
-            <div>{label}</div>
+            <div> {label}</div>
+            <div className="mr-2 float-rigth">{icon} </div>
         </div>
     )
 }
