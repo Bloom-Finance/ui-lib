@@ -1,9 +1,10 @@
+/* eslint-disable no-self-assign */
 /* eslint-disable @next/next/no-img-element */
 import { MouseEventHandler } from 'react'
 import React, { FC } from 'react'
 
 interface AvatarProps {
-    label: string
+    label?: string
     icon?: JSX.Element
     className?: string
     size?: 'small' | 'large'
