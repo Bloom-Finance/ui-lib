@@ -4,7 +4,6 @@ import Avatar from '../avatar'
 
 interface AuthUserProps {
     userName?: string
-    label?: string
     userEmail?: string
 }
 export const AuthUser = ({ userEmail, userName, ...props }: AuthUserProps) => {
@@ -13,7 +12,7 @@ export const AuthUser = ({ userEmail, userName, ...props }: AuthUserProps) => {
 
     return (
         <div className={`${classNameBase}  `}>
-            <Avatar label="" />
+            <Avatar user="LM" label="" />
             <div>
                 <h2 className="text-gray-900 text-base font-semibold">
                     {userName}

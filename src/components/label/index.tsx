@@ -1,8 +1,10 @@
-import React from 'react'
+import { Children, MouseEventHandler } from 'react'
+import React, { FC } from 'react'
 
-interface Props {
-    type?: 'title' | 'subtitle' | 'small' | 'xl'
+interface LabelProps {
+    type?: 'title' | 'subtitle' | 'small' | 'xl' | 'base'
     children?: any
+    text?: string
     color?:
         | 'warning'
         | 'error'
@@ -20,10 +22,20 @@ interface Props {
     clickable?: boolean
     align?: 'left' | 'right' | 'center'
 }
-
-const Component = (props: Props): JSX.Element => {
-    const getColor = () => {
-        switch (props.color) {
+export const Label = ({
+    type = 'small',
+    text,
+    children,
+    color,
+    weight,
+    className,
+    onClick,
+    clickable,
+    align,
+    ...props
+}: LabelProps) => {
+    let getColor = () => {
+        switch (color) {
             case 'warning':
                 return 'text-yellow-800'
             case 'error':
@@ -49,8 +61,8 @@ const Component = (props: Props): JSX.Element => {
         }
     }
 
-    const getWeight = () => {
-        switch (props.weight) {
+    let getWeight = () => {
+        switch (weight) {
             case 'semibold':
                 return 'font-semibold'
             case 'bold':
@@ -58,8 +70,8 @@ const Component = (props: Props): JSX.Element => {
         }
     }
 
-    const getSize = () => {
-        switch (props.type) {
+    let getSize = () => {
+        switch (type) {
             case 'title':
                 return 'text-3xl'
             case 'subtitle':
@@ -68,12 +80,14 @@ const Component = (props: Props): JSX.Element => {
                 return 'text-xl'
             case 'small':
                 return 'text-sm'
+            case 'base':
+                return 'text-base'
             default:
                 return 'text-base'
         }
     }
-    const getTextAlign = () => {
-        switch (props.align) {
+    let getTextAlign = () => {
+        switch (align) {
             case 'left':
                 return 'text-left'
             case 'right':
@@ -83,18 +97,20 @@ const Component = (props: Props): JSX.Element => {
         }
     }
 
+    let classNameBase = ' '
+    classNameBase = classNameBase
+
     return (
         <div
-            onClick={props.onClick}
-            className={`${
-                props.className
-            } ${getSize()} ${getColor()} ${getWeight()} ${getTextAlign()}  ${
-                props.clickable && 'cursor-pointer'
+            onClick={onClick}
+            className={`${className} ${getSize()} ${getColor()} ${getWeight()} ${getTextAlign()}  ${
+                clickable && 'cursor-pointer'
             }`}
         >
-            {props.children}
+            {text}
+            {children}
         </div>
     )
 }
 
-export default Component
+export default Label

@@ -1,21 +1,32 @@
-import React from 'react'
+import { MouseEventHandler } from 'react'
+import React, { FC } from 'react'
 import Label from '../../components/label'
 
-interface Props {
+interface WalletStatusProps {
+    icon?: JSX.Element
+    walletAdress?: string
     wallet?: string
-    idWallet?: string
-    walletIcon?: any
+    walletLogout?: string
+    onClick?: MouseEventHandler<HTMLButtonElement>
 }
+export const WalletStatus = ({
+    wallet = '',
+    walletAdress = '',
+    icon = <div></div>,
+    ...props
+}: WalletStatusProps) => {
+    let classNameBase =
+        'px-6 py-3 items-center bg-gray-100 flex justify-between '
+    classNameBase = classNameBase
 
-const Component = (props: Props): JSX.Element => {
     return (
         <div>
-            <div className="px-6 py-3 items-center bg-gray-100 flex justify-between">
+            <div className={`${classNameBase}`}>
                 <div className="flex items-center gap-x-1">
-                    <div>{props.walletIcon}</div>
+                    <div>{icon}</div>
                     <div className="px-2 py-2 mx-auto items-center grid place-items-strech">
                         <Label color="gray-600" align="left" type="small">
-                            {props.wallet}
+                            {wallet}
                         </Label>
 
                         <Label
@@ -24,7 +35,7 @@ const Component = (props: Props): JSX.Element => {
                             weight="bold"
                             className="text-ellipsis"
                         >
-                            {props.idWallet}
+                            {walletAdress}
                         </Label>
                     </div>
                 </div>
@@ -36,4 +47,4 @@ const Component = (props: Props): JSX.Element => {
     )
 }
 
-export default Component
+export default WalletStatus

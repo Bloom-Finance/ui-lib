@@ -41,7 +41,7 @@ export const Component = ({
             case 'completed':
                 return 'bg-green-600'
             case 'pending':
-                return 'bg-yellow-500'
+                return 'bg-gray-600'
             case 'cancelled':
                 return 'bg-red-500'
         }

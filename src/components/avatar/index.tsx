@@ -3,14 +3,13 @@ import { MouseEventHandler } from 'react'
 import React, { FC } from 'react'
 
 interface AvatarProps {
-    label: string
+    label?: string
     icon?: JSX.Element
     className?: string
     size?: 'small' | 'large'
     user?: string
 }
 export const Avatar = ({
-    label,
     user,
     size,
     icon = <div></div>,
