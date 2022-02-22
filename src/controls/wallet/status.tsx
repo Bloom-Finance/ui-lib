@@ -1,4 +1,7 @@
 import React from 'react'
+import { useMoralis } from 'react-moralis'
+import { FormatterManager } from '../../../../core-lib/common/helpers/formatter'
+import { WalletManager } from '../../../../core-lib/services/wallet.service'
 import Label from '../../components/label'
 
 interface Props {
@@ -8,6 +11,8 @@ interface Props {
 }
 
 const Component = (props: Props): JSX.Element => {
+    const walletManager = new WalletManager()
+    const { logout } = useMoralis()
     return (
         <div>
             <div className="px-6 py-3 items-center bg-gray-100 flex justify-between">
@@ -24,11 +29,11 @@ const Component = (props: Props): JSX.Element => {
                             weight="bold"
                             className="text-ellipsis"
                         >
-                            {props.idWallet}
+                            {FormatterManager.formatWalletAddress(props.idWallet as string)}
                         </Label>
                     </div>
                 </div>
-                <Label color="error" weight="bold" type="small">
+                <Label color="error" weight="bold" type="small" onClick={async () => walletManager.LogOut(logout) }>
                     Disconnect
                 </Label>
             </div>
