@@ -1,7 +1,7 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 
-import FileUpload from '../../components/fileUpload/fileUpload'
+import FileUpload from '../../controls/fileUpload'
 import '../../styles/index.css'
 
 export default {
