@@ -7,6 +7,9 @@ import { FormatterManager } from '../../../../core-lib/common/helpers/formatter'
 import _ from 'lodash'
 import Input from '../../components/input'
 import { useMoralis } from 'react-moralis'
+import Button from '../../../../ui-lib/src/components/button'
+import Moralis from 'moralis'
+import Balances from '../../../../ui-lib/src/controls/wallet/balances'
 
 interface Props {
     companyName: string
@@ -27,11 +30,15 @@ const Component = ({
 }: Props): JSX.Element => {
     const walletService = new WalletManager()
     const [email,setEmail] = useState('')
-    const {user}  = useMoralis()
+    const {user , isAuthenticated}  = useMoralis()
+    const [showBalances, setShowBalances] = useState(true)
+
+
+    if (showBalances) return <Balances />
     return (
         <div>
             <Container type="row">
-               { user?.isCurrent &&  <WalletStatus
+               { isAuthenticated &&  <WalletStatus
                     idWallet={walletService.getAddressCurrentUser()}
                 />}
                 <div>{companyName}</div>
@@ -67,7 +74,17 @@ const Component = ({
                     </div>
                 </div>
 
-                <Input label='Get the receipt' placeholder='Enter email address' onChange={e => setEmail(e.target.value)} value={email}  />
+                {walletService.activeProvider &&  <section>
+                    <Input label='Get the receipt' placeholder='Enter email address' onChange={e => setEmail(e.target.value)} value={email}  />
+                    <Button label='Continue' onClick={async () => {
+                        const balances = await Moralis.Web3API.account.getTransactions({
+                            chain:'ropsten',
+                            address:'0xd130d1ebb6881dbd2643df32170a45b65075433e'
+                        })
+                        console.log(walletService.getAddressCurrentUser() )
+                        console.log(balances)
+                    }}/>
+                </section>}
 
                 
             </Container>
