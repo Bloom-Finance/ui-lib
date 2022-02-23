@@ -11,6 +11,7 @@ interface FileUploadProps {
         fileToShow: string
         hasToUpdate?: boolean
     }
+    store?: any
 }
 
 const FileUpload = (props: FileUploadProps) => {
@@ -50,7 +51,7 @@ const FileUpload = (props: FileUploadProps) => {
                 setPreview(false)
                 setBlob(undefined)
             }
-            MerchantStore.update(s => {
+            props.store.update((s: any) => {
                 s.company_logo = ''
             })
             //Reset state
@@ -83,7 +84,7 @@ const FileUpload = (props: FileUploadProps) => {
                             size: uploadedFile.size
                         })
                         setFile(data)
-                        MerchantStore.update(s => {
+                        props.store.update((s: any) => {
                             s.company_logo = formattedName
                         })
                     })

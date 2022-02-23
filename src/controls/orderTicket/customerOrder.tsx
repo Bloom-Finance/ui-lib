@@ -29,18 +29,19 @@ const Component = ({
     date = new Date().getTime()
 }: Props): JSX.Element => {
     const walletService = new WalletManager()
-    const [email,setEmail] = useState('')
-    const {user , isAuthenticated}  = useMoralis()
+    const [email, setEmail] = useState('')
+    const { user, isAuthenticated } = useMoralis()
     const [showBalances, setShowBalances] = useState(true)
-
 
     if (showBalances) return <Balances />
     return (
         <div>
             <Container type="row">
-               { isAuthenticated &&  <WalletStatus
-                    idWallet={walletService.getAddressCurrentUser()}
-                />}
+                {isAuthenticated && (
+                    <WalletStatus
+                        walletAddress={walletService.getAddressCurrentUser()}
+                    />
+                )}
                 <div>{companyName}</div>
                 <div className="flex justify-between">
                     <div>{`Order #${orderNumber}`}</div>
@@ -74,19 +75,33 @@ const Component = ({
                     </div>
                 </div>
 
-                {walletService.activeProvider &&  <section>
-                    <Input label='Get the receipt' placeholder='Enter email address' onChange={e => setEmail(e.target.value)} value={email}  />
-                    <Button label='Continue' onClick={async () => {
-                        const balances = await Moralis.Web3API.account.getTransactions({
-                            chain:'ropsten',
-                            address:'0xd130d1ebb6881dbd2643df32170a45b65075433e'
-                        })
-                        console.log(walletService.getAddressCurrentUser() )
-                        console.log(balances)
-                    }}/>
-                </section>}
-
-                
+                {walletService.activeProvider && (
+                    <section>
+                        <Input
+                            label="Get the receipt"
+                            placeholder="Enter email address"
+                            onChange={e => setEmail(e.target.value)}
+                            value={email}
+                        />
+                        <Button
+                            label="Continue"
+                            onClick={async () => {
+                                const balances =
+                                    await Moralis.Web3API.account.getTransactions(
+                                        {
+                                            chain: 'ropsten',
+                                            address:
+                                                '0xd130d1ebb6881dbd2643df32170a45b65075433e'
+                                        }
+                                    )
+                                console.log(
+                                    walletService.getAddressCurrentUser()
+                                )
+                                console.log(balances)
+                            }}
+                        />
+                    </section>
+                )}
             </Container>
         </div>
     )

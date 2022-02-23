@@ -8,6 +8,7 @@ interface Props {
     wallet?: string
     idWallet?: string
     walletIcon?: any
+    walletAddress: string
 }
 
 const Component = (props: Props): JSX.Element => {
@@ -29,11 +30,16 @@ const Component = (props: Props): JSX.Element => {
                             weight="bold"
                             className="text-ellipsis"
                         >
-                            {FormatterManager.formatWalletAddress(props.idWallet as string)}
+                            {props.walletAddress}
                         </Label>
                     </div>
                 </div>
-                <Label color="error" weight="bold" type="small" onClick={async () => walletManager.LogOut(logout) }>
+                <Label
+                    color="error"
+                    weight="bold"
+                    type="small"
+                    onClick={async () => walletManager.LogOut(logout)}
+                >
                     Disconnect
                 </Label>
             </div>
