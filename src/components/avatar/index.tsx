@@ -1,3 +1,4 @@
+/* eslint-disable no-self-assign */
 /* eslint-disable @next/next/no-img-element */
 import { MouseEventHandler } from 'react'
 import React, { FC } from 'react'
