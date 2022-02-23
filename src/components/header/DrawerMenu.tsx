@@ -25,7 +25,7 @@ const DrawerMenu = (props: Props): JSX.Element => {
                     <li>
                         <WalletStatus
                             wallet="Wallet Connect"
-                            idWallet={props.walletAddress}
+                            walletAdress={props.walletAddress}
                         />
                     </li>
                     <li className="pt-4 px-1">

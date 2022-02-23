@@ -18,6 +18,7 @@ interface Props {
         | 'DAI'
         | 'USDT'
         | 'ETH'
+        | 'REFRESH'
     stroke: 1 | 2 | 3
     color?: string
     className?: string
@@ -459,6 +460,23 @@ const Component = (props: Props): JSX.Element => {
                         src="https://cdn.moralis.io/eth/0xdac17f958d2ee523a2206206994597c13d831ec7.png"
                         alt="USDT logo"
                     />
+                )
+            case 'REFRESH':
+                return (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={props.className}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke={props.color || 'currentColor'}
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={props.stroke}
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                        />
+                    </svg>
                 )
         }
     }

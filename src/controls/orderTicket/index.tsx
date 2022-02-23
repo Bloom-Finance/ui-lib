@@ -53,7 +53,7 @@ export const Component = ({
                     status === 'completed' && 'bg-green-600 rounded-t-lg  p-4'
                 } 
                 ${status === 'cancelled' && 'bg-red-600 rounded-t-lg  p-4'} ${
-                    status === 'pending' && 'bg-yellow-500 rounded-t-lg  p-4'
+                    status === 'pending' && 'bg-gray-600 rounded-t-lg  p-4'
                 }`}
             >
                 <div className="h-12 m-auto text-center">
@@ -75,7 +75,7 @@ export const Component = ({
                     )}
                     {status === 'pending' && (
                         <Icon
-                            type={'X'}
+                            type={'REFRESH'}
                             stroke={1}
                             className="m-auto h-12"
                             color="white"
@@ -85,8 +85,7 @@ export const Component = ({
 
                 <div className="text-center text-white text-base font-semibold">
                     {status === 'completed' && ` Payment received successfully`}
-                    {status === 'pending' &&
-                        ` There was an error processing your payment. Please try again.`}
+                    {status === 'pending' && ` The payment is being processed`}
                     {status === 'cancelled' && `The order has been cancelled`}
                 </div>
                 <div className="text-sm text-white text-center">
