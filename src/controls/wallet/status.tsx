@@ -8,6 +8,7 @@ interface Props {
     wallet?: string
     idWallet?: string
     walletIcon?: any
+    walletAddress: string
 }
 
 const Component = (props: Props): JSX.Element => {

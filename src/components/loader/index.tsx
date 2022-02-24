@@ -1,12 +1,17 @@
-import React from 'react'
-import type { NextPage } from 'next'
+import { Children, MouseEventHandler } from 'react'
+import React, { FC } from 'react'
 
-const Page: NextPage = () => {
+interface LoaderProps {
+    title?: string
+}
+export const Loader = ({ title, ...props }: LoaderProps) => {
+    const classNameBase = 'h-screen flex items-center justify-center '
+
     return (
-        <div className="h-screen flex items-center justify-center">
-            <div>Loading....</div>
+        <div className={classNameBase}>
+            <div>{title} ... </div>
         </div>
     )
 }
 
-export default Page
+export default Loader

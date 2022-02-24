@@ -11,7 +11,6 @@ interface AvatarProps {
     user?: string
 }
 export const Avatar = ({
-    label,
     user,
     size,
     icon = <div></div>,

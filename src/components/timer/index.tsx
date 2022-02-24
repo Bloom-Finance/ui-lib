@@ -1,21 +1,31 @@
-import React from 'react'
+import { MouseEventHandler } from 'react'
+import React, { FC } from 'react'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
-interface Props {
+interface TimerProps {
     duration: number
-    size?: 80
+    size?: 80 | 40
     stroke: 1 | 2 | 3 | 4 | 5 | 6
     children?: any
     remainingTime?: number
 }
+export const Timer = ({
+    duration,
+    size,
+    stroke,
+    children,
+    remainingTime,
+    ...props
+}: TimerProps) => {
+    let classNameBase = ' '
+    classNameBase = classNameBase
 
-const Component = (props: Props): JSX.Element => {
     return (
         <CountdownCircleTimer
             isPlaying
-            duration={props.duration}
-            size={props.size}
-            strokeWidth={props.stroke}
+            duration={duration}
+            size={size}
+            strokeWidth={stroke}
             colors={['#35CD81', '#35CD81', '#35CD81', '#35CD81']}
             colorsTime={[7, 5, 2, 0]}
         >
@@ -24,4 +34,4 @@ const Component = (props: Props): JSX.Element => {
     )
 }
 
-export default Component
+export default Timer

@@ -41,7 +41,7 @@ const Component = ({
             <Container type="row">
                 {isAuthenticated && (
                     <WalletStatus
-                        idWallet={walletService.getAddressCurrentUser()}
+                        walletAddress={walletService.getAddressCurrentUser()}
                     />
                 )}
                 <div>{companyName}</div>
