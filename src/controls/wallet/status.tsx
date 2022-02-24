@@ -29,11 +29,18 @@ const Component = (props: Props): JSX.Element => {
                             weight="bold"
                             className="text-ellipsis"
                         >
-                            {FormatterManager.formatWalletAddress(props.idWallet as string)}
+                            {FormatterManager.formatWalletAddress(
+                                props.idWallet as string
+                            )}
                         </Label>
                     </div>
                 </div>
-                <Label color="error" weight="bold" type="small" onClick={async () => walletManager.LogOut(logout) }>
+                <Label
+                    color="error"
+                    weight="bold"
+                    type="small"
+                    onClick={async () => walletManager.LogOut(logout)}
+                >
                     Disconnect
                 </Label>
             </div>
