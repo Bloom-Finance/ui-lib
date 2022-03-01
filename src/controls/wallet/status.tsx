@@ -6,7 +6,6 @@ import Label from '../../components/label'
 
 interface Props {
     wallet?: string
-    idWallet?: string
     walletIcon?: any
     walletAddress: string
 }
@@ -31,7 +30,7 @@ const Component = (props: Props): JSX.Element => {
                             className="text-ellipsis"
                         >
                             {FormatterManager.formatWalletAddress(
-                                props.idWallet as string
+                                props.walletAddress as string
                             )}
                         </Label>
                     </div>

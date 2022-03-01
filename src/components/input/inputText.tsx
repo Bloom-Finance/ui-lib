@@ -4,6 +4,7 @@ interface InputTextProps {
     label?: string
     placeholder: string
     error?: any
+    autofocus?: boolean
     controller?: {
         onChange: ChangeEventHandler<HTMLInputElement>
         ref: LegacyRef<HTMLInputElement>
@@ -34,6 +35,7 @@ const InputText = (props: InputTextProps) => {
                     ref={props.controller?.ref}
                     onChange={props.controller?.onChange}
                     type="text"
+                    autoFocus={props.autofocus}
                     placeholder={props.placeholder}
                     className={`input ${
                         props.label && 'input-border-b text-gray-600'
