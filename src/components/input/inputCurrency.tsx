@@ -6,12 +6,9 @@ interface Props {
     label?: string
     placeholder?: string
     currency?: string
-    controller: {
-        onChange: ChangeEventHandler<HTMLInputElement>
-        ref: LegacyRef<HTMLInputElement>
-        onBlur: React.FocusEventHandler<HTMLInputElement>
-    }
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     autoFocus?: boolean
+    value: number
 }
 const InputCurrency = (props: Props): JSX.Element => {
     return (
@@ -19,8 +16,8 @@ const InputCurrency = (props: Props): JSX.Element => {
             <div className="flex items-center gap-x-3">
                 <input
                     type="number"
-                    ref={props.controller?.ref}
-                    onChange={props.controller?.onChange}
+                    defaultValue={props.value <= 0 ? '' : props.value}
+                    onChange={props.onChange}
                     className="text-center w-12 min-w-24 text-4xl font-semibold text-gray-900 placeholder:text-gray-900"
                     placeholder={props.placeholder}
                 ></input>

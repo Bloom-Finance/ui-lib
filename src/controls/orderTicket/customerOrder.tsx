@@ -32,9 +32,6 @@ const Component = ({
     const [email, setEmail] = useState('')
     const { user, isAuthenticated } = useMoralis()
     const [showBalances, setShowBalances] = useState(true)
-
-    console.log(walletService.getCurrentChainId())
-
     if (showBalances) return <Balances />
     return (
         <div>
@@ -96,10 +93,6 @@ const Component = ({
                                                 '0xd130d1ebb6881dbd2643df32170a45b65075433e'
                                         }
                                     )
-                                console.log(
-                                    walletService.getAddressCurrentUser()
-                                )
-                                console.log(balances)
                             }}
                         />
                     </section>
