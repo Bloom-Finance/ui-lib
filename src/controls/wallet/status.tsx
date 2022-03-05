@@ -6,41 +6,41 @@ import Label from '../../components/label'
 
 interface Props {
     wallet?: string
-    idWallet?: string
-    walletIcon?: any
-    walletAddress: string
+    walletIcon?: string
+    walletAddress?: string
+    onLogout: any
 }
 
 const Component = (props: Props): JSX.Element => {
-    const walletManager = new WalletManager()
-    const { logout } = useMoralis()
     return (
         <div>
             <div className="px-6 py-3 items-center bg-gray-100 flex justify-between">
                 <div className="flex items-center gap-x-1">
-                    <div>{props.walletIcon}</div>
+                    <img className="h-10 w-10" src={props.walletIcon} />
                     <div className="px-2 py-2 mx-auto items-center grid place-items-strech">
                         <Label color="gray-600" align="left" type="small">
                             {props.wallet}
                         </Label>
 
-                        <Label
-                            align="left"
-                            type="small"
-                            weight="bold"
-                            className="text-ellipsis"
-                        >
-                            {FormatterManager.formatWalletAddress(
-                                props.idWallet as string
-                            )}
-                        </Label>
+                        <div className="flex">
+                            <Label
+                                align="left"
+                                type="small"
+                                weight="bold"
+                                className="text-ellipsis"
+                            >
+                                {FormatterManager.formatWalletAddress(
+                                    props.walletAddress as string
+                                )}
+                            </Label>
+                        </div>
                     </div>
                 </div>
                 <Label
                     color="error"
                     weight="bold"
                     type="small"
-                    onClick={async () => walletManager.LogOut(logout)}
+                    onClick={async () => props.onLogout()}
                 >
                     Disconnect
                 </Label>

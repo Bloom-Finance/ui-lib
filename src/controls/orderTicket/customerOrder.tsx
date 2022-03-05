@@ -32,16 +32,16 @@ const Component = ({
     const [email, setEmail] = useState('')
     const { user, isAuthenticated } = useMoralis()
     const [showBalances, setShowBalances] = useState(true)
-
-    console.log(walletService.getCurrentChainId())
-
-    if (showBalances) return <Balances />
+    const { logout } = useMoralis()
+    // if (showBalances) return <Balances />
     return (
         <div>
             <Container type="row">
-                {isAuthenticated && (
+                {walletService.activeProvider && (
                     <WalletStatus
+                        walletIcon={walletService.getWalletIcon()}
                         walletAddress={walletService.getAddressCurrentUser()}
+                        onLogout={() => walletService.LogOut(logout)}
                     />
                 )}
                 <div>{companyName}</div>
