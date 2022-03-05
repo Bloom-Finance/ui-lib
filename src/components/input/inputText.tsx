@@ -4,19 +4,17 @@ interface InputTextProps {
     label?: string
     placeholder: string
     error?: any
-    controller?: {
-        onChange: ChangeEventHandler<HTMLInputElement>
-        ref: LegacyRef<HTMLInputElement>
-    }
-    defaultValue?: string
+    autofocus?: boolean
     className?: any
+    value: string
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 /**
  * @description Styled input type text component
  * @param label Label to be shown in the upper area
  * @param placeholder Default placeholder to show inside input
- * @param controller  !IMPORTANT to connect with react-hook forms
- * @param defaultValue  Optional param to set a value by default
+ * @param onChange  !IMPORTANT to properly work the input
+ * @param value  !IMPORTANT to properly be working
  */
 const InputText = (props: InputTextProps) => {
     return (
@@ -30,10 +28,10 @@ const InputText = (props: InputTextProps) => {
                     </label>
                 )}
                 <input
-                    defaultValue={props.defaultValue || ''}
-                    ref={props.controller?.ref}
-                    onChange={props.controller?.onChange}
+                    onChange={props.onChange}
+                    value={props.value}
                     type="text"
+                    autoFocus={props.autofocus}
                     placeholder={props.placeholder}
                     className={`input ${
                         props.label && 'input-border-b text-gray-600'

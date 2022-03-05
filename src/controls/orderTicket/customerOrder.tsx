@@ -96,10 +96,6 @@ const Component = ({
                                                 '0xd130d1ebb6881dbd2643df32170a45b65075433e'
                                         }
                                     )
-                                console.log(
-                                    walletService.getAddressCurrentUser()
-                                )
-                                console.log(balances)
                             }}
                         />
                     </section>

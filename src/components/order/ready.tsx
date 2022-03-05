@@ -1,9 +1,5 @@
 import React from 'react'
 import type { NextPage } from 'next'
-import Footer from '../footer'
-import SimplePage from '../simplePage'
-import Header from '../header'
-import ButtonBack from '../header/backButton'
 import Container from '../container'
 import Label from '../label'
 import { useRouter } from 'next/router'
@@ -11,12 +7,16 @@ import Icon from '../icon'
 import QRCode from 'react-qr-code'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import Timer from '../timer'
-
-const Page: NextPage = () => {
+interface Props {
+    timedOut: () => void
+}
+const OrderReady = (props: Props) => {
     const router = useRouter()
     return (
         <Container type="row" justify="center">
-            <Label className="px-12 pt-2" color="gray-500">Show this QR code to your customer</Label>
+            <Label className="px-12 pt-2" color="gray-500">
+                Show this QR code to your customer
+            </Label>
             <QRCode className="mt-4 mb-16" value="https://google.com" />
 
             <CountdownCircleTimer
@@ -27,7 +27,12 @@ const Page: NextPage = () => {
                 colors={['#35CD81', '#35CD81', '#35CD81', '#35CD81']}
                 colorsTime={[7, 5, 2, 0]}
             >
-                {({ remainingTime }) => remainingTime}
+                {({ remainingTime }) => {
+                    if (remainingTime === 0) {
+                        props.timedOut()
+                    }
+                    return remainingTime
+                }}
             </CountdownCircleTimer>
             <div className="flex justify-center pt-8">
                 <div
@@ -49,4 +54,4 @@ const Page: NextPage = () => {
     )
 }
 
-export default Page
+export default OrderReady

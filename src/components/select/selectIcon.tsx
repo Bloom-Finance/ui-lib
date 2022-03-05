@@ -2,10 +2,7 @@
 import React, { LegacyRef, ChangeEventHandler } from 'react'
 interface SelectIconProps {
     label: string
-    controller?: {
-        onChange: ChangeEventHandler<HTMLSelectElement>
-        ref: LegacyRef<HTMLSelectElement>
-    }
+
     placeholder: string
     options: Array<{
         value: string
@@ -13,6 +10,7 @@ interface SelectIconProps {
     }>
     disabled?: boolean
     defaultValue?: string
+    onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 const SelectIcon = (props: SelectIconProps) => {
     return (
@@ -22,8 +20,7 @@ const SelectIcon = (props: SelectIconProps) => {
                     <span className="label-text">{props.label}</span>
                 </label>
                 <select
-                    ref={props.controller?.ref}
-                    onChange={props.controller?.onChange}
+                    onChange={props.onChange}
                     placeholder="Select an option"
                     className="select input w-full"
                     disabled={props.disabled}
