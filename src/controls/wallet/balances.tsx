@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useMoralis } from 'react-moralis'
 import { FormatterManager } from '../../../../core-lib/common/helpers/formatter'
 import { WalletManager } from '../../../../core-lib/services/wallet.service'
+import { formatCurrency } from '@coingecko/cryptoformat'
 
 interface Props {
     className?: string
@@ -9,52 +10,42 @@ interface Props {
 
 const Component = (props: Props): JSX.Element => {
     const { Moralis } = useMoralis()
-
     const contractAddresses = FormatterManager.formatContractAddresses()
-    const walletManager = new WalletManager()
+    const [balance, setBalance] = useState([])
 
-    const checkChainAddresses = (selected_chain: string) => {
-        const filtered_addreses = contractAddresses.filter(v => {
-            if (v.chain === selected_chain) {
-                return v.addresses
-            }
-        })
-        return filtered_addreses[0].addresses
-    }
+    const walletManager = new WalletManager()
 
     useEffect(() => {
         ;(async () => {
-            const metadata = await Moralis.Web3API.token.getTokenMetadata({
-                chain: walletManager.getCurrentChainId().type,
-                addresses: checkChainAddresses(
-                    walletManager.getCurrentChainId().type
-                )
-            })
-
-            console.log(metadata)
-
-            console.log(walletManager.getAddressCurrentUser())
-            console.log(
-                await Moralis.Web3API.account.getTokenBalances({
-                    chain: walletManager.getCurrentChainId().type,
-                    address: walletManager.getAddressCurrentUser()
-                })
-            )
-
-            console.log(
-                await walletManager.activeProvider.provider?.getWalletConnector()
-            )
-
-            console.log(
-                await Moralis.Web3API.account.getNativeBalance({
-                    chain: walletManager.getCurrentChainId().type,
-                    address: walletManager.getAddressCurrentUser()
-                })
-            )
+            setBalance((await walletManager.getBalances()) as [])
         })()
     }, [])
 
-    return <div>Balances</div>
+    console.log(balance)
+    return (
+        <div>
+            {balance.map(b => (
+                <div key={b.token_address} className="flex justify-between">
+                    <div>
+                        <div>{b.symbol}</div>
+                    </div>
+                    <div>
+                        <div>
+                            {formatCurrency(
+                                Number(b.balance),
+                                b.symbol,
+                                'en',
+                                false,
+                                {
+                                    decimalPlaces: Number(b.decimals)
+                                }
+                            )}
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
 }
 
 export default Component

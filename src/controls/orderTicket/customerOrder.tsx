@@ -31,13 +31,15 @@ const Component = ({
     const walletService = new WalletManager()
     const [email, setEmail] = useState('')
     const { user, isAuthenticated } = useMoralis()
-    const [showBalances, setShowBalances] = useState(true)
+    const [showBalances, setShowBalances] = useState(false)
     const { logout } = useMoralis()
-    // if (showBalances) return <Balances />
+
+    if (showBalances) return <Balances />
+
     return (
         <div>
             <Container type="row">
-                {walletService.activeProvider && (
+                {walletService.connected && (
                     <WalletStatus
                         walletIcon={walletService.getWalletIcon()}
                         walletAddress={walletService.getAddressCurrentUser()}
@@ -87,15 +89,9 @@ const Component = ({
                         />
                         <Button
                             label="Continue"
-                            onClick={async () => {
-                                const balances =
-                                    await Moralis.Web3API.account.getTransactions(
-                                        {
-                                            chain: 'ropsten',
-                                            address:
-                                                '0xd130d1ebb6881dbd2643df32170a45b65075433e'
-                                        }
-                                    )
+                            disabled={!email}
+                            onClick={() => {
+                                setShowBalances(true)
                             }}
                         />
                     </section>
