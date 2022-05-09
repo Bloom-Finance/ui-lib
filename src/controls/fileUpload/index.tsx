@@ -1,29 +1,253 @@
-import React, { useState } from 'react'
-import MerchantStore from '../../../../store/merchant.store'
-import { firebaseManager } from '../../../../services/firebase.services'
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import type { NextPage } from 'next'
+import { firebaseManager } from '../../../../core-lib/services/firebase.services'
 
-interface FileUploadProps {
-    label: string
-    placeholder: string
+import Icon from '../../components/icon'
+
+interface FileUpload {
+    placeholder?: string
     extensions: Array<string>
-    optionalParams?: {
-        fileToShow: string
-        hasToUpdate?: boolean
-    }
-    store?: any
+    readonly?: boolean
+    optionalParams?: any
+    showFullScreen?: boolean
+    key?: string
+    onChange?: any
+    defaultFilePath?: string
+    folder: string
 }
 
-const FileUpload = (props: FileUploadProps) => {
+interface FileInfo {
+    extension: string
+    size: number
+    fileName: string
+}
+
+const FileUpload: NextPage<FileUpload> = ({
+    placeholder,
+    extensions,
+    readonly = false,
+    optionalParams = [],
+    showFullScreen = false,
+    key = '',
+    onChange = () => void null,
+    defaultFilePath = null,
+    folder = ''
+}) => {
     /*Manage blob*/
-    const [file, setFile] = useState<FormData>()
-    const [blob, setBlob] = useState<string>()
+    const [file, setFile] = useState<any>(null)
+    const [blob, setBlob] = useState<any>()
     /*File info set in state*/
     const [fileInfo, setFileInfo] = useState<any>()
     const [preview, setPreview] = useState(false)
+    const [deleted, setDeleted] = useState(false)
+    const [processingFile, setProcessingFile] = useState(false)
+
+    const FullScreenComponent = () => {
+        if (preview)
+            return (
+                <div className="indicator w-full">
+                    <div
+                        className="indicator-item bg-white p-2 rounded-full cursor-pointer border"
+                        onClick={async () => {
+                            await deleteFile()
+                        }}
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="red"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                            />
+                        </svg>
+                    </div>
+
+                    <iframe className="h-screen w-full" src={`${blob}`} />
+                </div>
+            )
+        return (
+            <div className="hero min-h-screen bg-base-200">
+                <div className="text-center hero-content">
+                    <div className="max-w-md">
+                        <h1 className="mb-5 text-5xl font-bold">
+                            Archivo adjunto
+                        </h1>
+                        <p className="mb-5">
+                            Por favor, haga click en Subir Archivo para poder
+                            adjuntar el archivo pdf al expediente
+                        </p>
+                        <label
+                            className="w-64 flex flex-col items-center px-4 py-3 bg-white rounded-md shadow-md tracking-wide uppercase
+                                cursor-pointer
+                                hover:bg-purple-600 hover:text-white
+                                text-purple-600
+                                ease-linear
+                                transition-all
+                                duration-150
+                                border border-blue"
+                        >
+                            Subir archivo
+                            <input
+                                type="file"
+                                readOnly={readonly}
+                                onChange={async e => {
+                                    await onChangeHandler(e)
+                                    await previewFile()
+                                }}
+                                className="hidden"
+                            />
+                        </label>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    const FileInputComponent = () => {
+        return (
+            <div className="form-control ml-4">
+                <div className="flex">
+                    <label
+                        className=" flex  items-center px-4 py-3 bg-white rounded-md shadow-md tracking-wide uppercase
+                        cursor-pointer
+                        hover:bg-purple-600 hover:text-white
+                        text-purple-600
+                        ease-linear
+                        transition-all
+                        duration-150
+                        border border-blue
+                                                "
+                    >
+                        <span className="text-base leading-normal">
+                            {placeholder}
+                        </span>
+
+                        <div className="flex">
+                            {processingFile && (
+                                <button className="btn loading btn-ghost"></button>
+                            )}
+                            {readonly ? (
+                                <></>
+                            ) : (
+                                <input
+                                    type="file"
+                                    readOnly={readonly}
+                                    onChange={onChangeHandler}
+                                    className="hidden"
+                                />
+                            )}
+                        </div>
+                    </label>
+                    {fileInfo?.fileName && (
+                        <div className="ml-2">
+                            <div
+                                onClick={previewFile}
+                                className="cursor-pointer"
+                            >
+                                <Icon type={'EXPAND'} stroke={1} />
+                            </div>
+
+                            {!readonly && (
+                                <div
+                                    onClick={deleteFile}
+                                    className="cursor-pointer"
+                                >
+                                    <Icon
+                                        type={'REMOVE'}
+                                        stroke={1}
+                                        color="red"
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
+                {preview && (
+                    <div className="my-6 indicator w-full">
+                        <div className="indicator-item  ">
+                            <button
+                                className="btn btn-error"
+                                onClick={() => setPreview(false)}
+                            >
+                                Cerrar
+                            </button>
+                        </div>
+                        <iframe
+                            className="h-screen w-full pt-4"
+                            src={`${blob}`}
+                        />
+                    </div>
+                )}
+            </div>
+        )
+    }
+
+    useEffect(() => {
+        ;(async () => {
+            if (!defaultFilePath) return
+
+            setProcessingFile(true)
+            const url = await firebaseManager.getFileUrl(defaultFilePath)
+            setFileInfo({
+                fileName: url
+            })
+            setBlob(url)
+            setProcessingFile(false)
+        })()
+    }, [defaultFilePath])
+
+    useEffect(() => {
+        if (optionalParams.length > 0 && !deleted) {
+            setFileInfo({
+                extension: optionalParams[0].extension,
+                size: optionalParams[0].size,
+                fileName: optionalParams[0].name
+            })
+        }
+    }, [optionalParams])
+
+    const previewFile = async () => {
+        let blob
+        if (optionalParams.length > 0 || readonly) {
+            const url = await firebaseManager.getFileUrl(
+                readonly ? defaultFilePath : optionalParams[0].fullPath
+            )
+            blob = url
+        } else {
+            blob = URL.createObjectURL(file.get('file'))
+        }
+        setBlob(blob)
+        setPreview(!preview)
+    }
+    const deleteFile = async () => {
+        if (fileInfo?.fileName || optionalParams.length > 0) {
+            if (preview) {
+                setPreview(false)
+                setBlob({})
+            }
+            setFile({})
+            setFileInfo(undefined)
+            await firebaseManager
+                .deleteFile(fileInfo?.fileName)
+                .then(snapshot => {
+                    setDeleted(true)
+                    onChange(null)
+                    setProcessingFile(false)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+    }
     const checkExtension = (file: File): { ext: string; correct: boolean } => {
         const ext: string = file.type.split('/')[1]
-        const correctExt = props.extensions.filter(e =>
+        const correctExt = extensions.filter(e =>
             ext.includes(e) ? true : false
         )
         return correctExt.length > 0
@@ -38,34 +262,9 @@ const FileUpload = (props: FileUploadProps) => {
         )}.${ext}`
         return formattedName
     }
-    const previewFile = async () => {
-        if (!props.optionalParams?.hasToUpdate && !blob) {
-            const blob = URL.createObjectURL(file?.get('file') as Blob)
-            setBlob(blob)
-        }
-        setPreview(!preview)
-    }
-    const deleteFile = () => {
-        if (fileInfo?.fileName) {
-            if (preview) {
-                setPreview(false)
-                setBlob(undefined)
-            }
-            props.store.update((s: any) => {
-                s.company_logo = ''
-            })
-            //Reset state
-            setFile(undefined)
-            setFileInfo(undefined)
-            firebaseManager
-                .deleteFile(fileInfo?.fileName, 'companies')
-                .catch(err => {
-                    console.error(err)
-                })
-        }
-    }
     const onChangeHandler = (e: any) => {
-        if (e.target.files.length > 0) {
+        if (e.target.files) {
+            setProcessingFile(true)
             if (file) deleteFile()
             const files: Array<File> = e.target.files
             files.length > 1 && console.error('Cant upload more than 1 file')
@@ -75,110 +274,29 @@ const FileUpload = (props: FileUploadProps) => {
                 const formattedName = checkImgName(uploadedFile.name, ext)
                 const data = new FormData()
                 data.append('file', uploadedFile, formattedName)
+
                 firebaseManager
-                    .uploadFile(data.get('file') as File, 'companies')
-                    .then(() => {
+                    .uploadFile(data.get('file') as File, folder as string)
+                    .then(snapshot => {
                         setFileInfo({
                             fileName: formattedName,
                             extension: ext,
                             size: uploadedFile.size
                         })
                         setFile(data)
-                        props.store.update((s: any) => {
-                            s.company_logo = formattedName
-                        })
-                    })
-                    .catch(err => {
-                        console.error(err)
+                        onChange(snapshot.metadata.fullPath)
+                        setProcessingFile(false)
                     })
             } else {
                 console.error('Incorrect extension!!')
             }
         }
     }
-    useEffect(() => {
-        ;(async () => {
-            if (props.optionalParams?.fileToShow) {
-                if (props.optionalParams.hasToUpdate) {
-                    try {
-                        const fileMetadata =
-                            await firebaseManager.getFileMetadata(
-                                props.optionalParams.fileToShow,
-                                'companies'
-                            )
-                        const blob = await firebaseManager.getFileBlobUrl(
-                            fileMetadata.fullPath
-                        )
-                        setFileInfo({
-                            fileName: props.optionalParams.fileToShow
-                        })
-                        setBlob(blob)
-                    } catch (error) {
-                        console.error(error)
-                    }
-                }
-            }
-        })()
-    }, [])
     return (
-        <div>
-            <div className="form-control m b-4">
-                <label className="text-black">
-                    <span className="label-text">{props.label}</span>
-                </label>
-                <div className="relative">
-                    <input
-                        type="file"
-                        onChange={onChangeHandler}
-                        placeholder={props.placeholder}
-                        className="w-full pr-16 border-b"
-                    />
-                    <button className="absolute top-0 right-0    btn-square btn-xs drawer-button">
-                        <CameraIcon />
-                    </button>
-                    <div className="flex flex-col">
-                        {fileInfo?.fileName && (
-                            <>
-                                <span>{fileInfo?.fileName}</span>
-                                <span onClick={previewFile}>Preview</span>
-                                <span onClick={deleteFile}>Delete</span>
-                            </>
-                        )}
-                        {preview && (
-                            <iframe
-                                className="h-screen w-full"
-                                src={`${blob}`}
-                            />
-                        )}
-                    </div>
-                </div>
-            </div>
+        <div key={`fileUpload${key}`} className="w-full">
+            {showFullScreen ? <FullScreenComponent /> : <FileInputComponent />}
         </div>
     )
 }
-export default FileUpload
 
-const CameraIcon = () => (
-    <svg
-        width="20"
-        height="18"
-        viewBox="0 0 20 18"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-    >
-        <path
-            d="M1 6C1 4.89543 1.89543 4 3 4H3.92963C4.59834 4 5.2228 3.6658 5.59373 3.1094L6.40627 1.8906C6.7772 1.3342 7.40166 1 8.07037 1H11.9296C12.5983 1 13.2228 1.3342 13.5937 1.8906L14.4063 3.1094C14.7772 3.6658 15.4017 4 16.0704 4H17C18.1046 4 19 4.89543 19 6V15C19 16.1046 18.1046 17 17 17H3C1.89543 17 1 16.1046 1 15V6Z"
-            stroke="#111827"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        />
-        <path
-            d="M13 10C13 11.6569 11.6569 13 10 13C8.34315 13 7 11.6569 7 10C7 8.34315 8.34315 7 10 7C11.6569 7 13 8.34315 13 10Z"
-            stroke="#111827"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        />
-    </svg>
-)
+export default FileUpload
