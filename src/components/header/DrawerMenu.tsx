@@ -24,6 +24,7 @@ const DrawerMenu = (props: Props): JSX.Element => {
                 <ul className="menu overflow-y-auto w-10/12 left-0 bg-base-100 text-base-content h-screen absolute top-0 ">
                     <li>
                         <WalletStatus
+                            onLogout={() => console.log('loged out')}
                             wallet="Wallet Connect"
                             walletAddress={props.walletAddress}
                         />

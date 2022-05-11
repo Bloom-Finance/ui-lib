@@ -11,7 +11,7 @@ interface Props {
 const Component = (props: Props): JSX.Element => {
     const { Moralis } = useMoralis()
     const contractAddresses = FormatterManager.formatContractAddresses()
-    const [balance, setBalance] = useState([])
+    const [balance, setBalance] = useState<Array<any>>([])
 
     const walletManager = new WalletManager()
 

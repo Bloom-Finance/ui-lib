@@ -8,7 +8,7 @@ interface Props {
     wallet?: string
     walletIcon?: string
     walletAddress?: string
-    onLogout: any
+    onLogout: () => void
 }
 
 const Component = (props: Props): JSX.Element => {
