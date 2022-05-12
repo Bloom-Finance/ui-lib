@@ -113,8 +113,9 @@ const FileUpload: NextPage<FileUpload> = ({
         return (
             <div className="form-control ml-4">
                 <div className="flex">
-                    <label
-                        className=" flex w-full justify-center items-center px-4 py-3 bg-white rounded-md shadow-md tracking-wide uppercase
+                    {!fileInfo?.fileName && (
+                        <label
+                            className=" flex w-full justify-center items-center px-4 py-3 bg-white rounded-md shadow-md tracking-wide uppercase
                         cursor-pointer
                         hover:bg-purple-600 hover:text-white
                         text-purple-600
@@ -123,29 +124,31 @@ const FileUpload: NextPage<FileUpload> = ({
                         duration-150
                         border border-blue
                                                 "
-                    >
-                        <span className="text-base leading-normal">
-                            {placeholder}
-                        </span>
+                        >
+                            <span className="text-base leading-normal">
+                                {placeholder}
+                            </span>
 
-                        <div className="flex">
-                            {processingFile && (
-                                <button className="btn loading btn-ghost"></button>
-                            )}
-                            {readonly ? (
-                                <></>
-                            ) : (
-                                <input
-                                    type="file"
-                                    readOnly={readonly}
-                                    onChange={onChangeHandler}
-                                    className="hidden"
-                                />
-                            )}
-                        </div>
-                    </label>
+                            <div className="flex">
+                                {processingFile && (
+                                    <button className="btn loading btn-ghost"></button>
+                                )}
+                                {readonly ? (
+                                    <></>
+                                ) : (
+                                    <input
+                                        type="file"
+                                        readOnly={readonly}
+                                        onChange={onChangeHandler}
+                                        className="hidden"
+                                    />
+                                )}
+                            </div>
+                        </label>
+                    )}
                     {fileInfo?.fileName && (
                         <div className="ml-2">
+                            <div>{fileInfo.fileName}</div>
                             <div
                                 onClick={previewFile}
                                 className="cursor-pointer"
@@ -175,7 +178,7 @@ const FileUpload: NextPage<FileUpload> = ({
                                 className="btn btn-error"
                                 onClick={() => setPreview(false)}
                             >
-                                Cerrar
+                                Close
                             </button>
                         </div>
                         <iframe
