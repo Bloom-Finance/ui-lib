@@ -114,7 +114,7 @@ const FileUpload: NextPage<FileUpload> = ({
             <div className="form-control ml-4">
                 <div className="flex">
                     <label
-                        className=" flex  items-center px-4 py-3 bg-white rounded-md shadow-md tracking-wide uppercase
+                        className=" flex w-full justify-center items-center px-4 py-3 bg-white rounded-md shadow-md tracking-wide uppercase
                         cursor-pointer
                         hover:bg-purple-600 hover:text-white
                         text-purple-600

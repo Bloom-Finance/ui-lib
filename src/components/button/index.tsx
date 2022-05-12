@@ -29,7 +29,7 @@ export const Button = ({
     }
 
     let classNameBase =
-        'text-lg font-semibold rounded-lg p-4 w-full flex items-center justify-center gap-x-2'
+        'text-base font-semibold rounded-lg p-4 w-full flex items-center justify-center gap-x-2'
     classNameBase = classNameBase + getType()
     classNameBase = classNameBase + (disabled ? ' opacity-50' : '')
     return (
