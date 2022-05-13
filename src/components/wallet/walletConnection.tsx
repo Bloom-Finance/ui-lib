@@ -55,7 +55,7 @@ const WalletAuth = (props: WalletAuthProps) => {
     }
     return (
         <div className="flex flex-col">
-            <button className="mb-2" onClick={walletAuthentication}>
+            <button className="" onClick={walletAuthentication}>
                 {props.children}
             </button>
         </div>
