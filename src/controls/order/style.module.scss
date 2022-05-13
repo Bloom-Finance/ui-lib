@@ -1,0 +1,35 @@
+.card {
+    @apply p-4 bg-gray-200 flex h-screen w-screen items-center;
+}
+
+.headerSuccess {
+    background: #16a34a;
+    sub {
+        @apply text-gray-200;
+    }
+
+    @apply text-center font-thin text-gray-50 py-8 rounded-t-lg;
+}
+
+.contentBody {
+    h2 {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 150%;
+    }
+
+    b {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 150%;
+    }
+    @apply text-center text-gray-900 py-8 bg-white;
+}
+
+.contentItems {
+    @apply text-center py-8 bg-white;
+}
+
+.contentFooter {
+    @apply text-center py-8 bg-white rounded-b-lg;
+}
