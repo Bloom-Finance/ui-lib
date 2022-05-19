@@ -3,6 +3,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import React, { useEffect } from 'react'
 import { useMoralis } from 'react-moralis'
 import { WalletManager } from '../../../../core-lib/services/wallet.service'
+import Button from '../button'
 interface activeProvider {
     provider?: WalletConnectProvider
 }
@@ -55,9 +56,11 @@ const WalletAuth = (props: WalletAuthProps) => {
     }
     return (
         <div className="flex flex-col">
-            <button className="" onClick={walletAuthentication}>
-                {props.children}
-            </button>
+            <Button
+                label="Crypto"
+                type="tonal"
+                onClick={walletAuthentication}
+            ></Button>
         </div>
     )
 }

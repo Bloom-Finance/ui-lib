@@ -3,6 +3,7 @@ import styles from './style.module.scss'
 import Divider from '../../components/divider'
 import moment from 'moment'
 import { formatCurrency } from '@coingecko/cryptoformat'
+import Icon from '../../components/icon'
 
 interface Props {
     order: Order
@@ -10,24 +11,47 @@ interface Props {
 }
 
 const Component = (props: Props): JSX.Element => {
+    const HeaderSuccess = () => {
+        return (
+            <section className={styles.headerSuccess}>
+                <div className="flex w-full justify-center py-6">
+                    <Icon type={'CHECK'} stroke={1}></Icon>
+                </div>
+                <p>Thank you for your payment</p>
+                <div>
+                    <sub>{`Receipt number #${props.order.id}`} </sub>
+                </div>
+                <div>
+                    <sub>{`Payed on ${moment(props.payment?.date).format(
+                        'LLL'
+                    )}`}</sub>
+                </div>
+            </section>
+        )
+    }
+    const HeaderInReview = () => {
+        return (
+            <section className={styles.headerInReview}>
+                <div className="flex w-full justify-center py-6">
+                    <Icon type={'CLOCK'} stroke={1}></Icon>
+                </div>
+                <p>We&apos;re reviewing your payment</p>
+                <p>
+                    Thank you for your patience! You&apos;ll be contacted by our
+                    team shortly.
+                </p>
+            </section>
+        )
+    }
     return (
         <div className={styles.card}>
             <div className="w-full">
-                <section className={styles.headerSuccess}>
-                    <div className="flex w-full justify-center py-6">
-                        <IconClock />
-                    </div>
-                    <p>Thank you for your payment</p>
-                    <div>
-                        <sub>{`Receipt number #${props.order.id}`} </sub>
-                    </div>
-                    <div>
-                        <sub>{`Payed on ${moment(props.payment?.date).format(
-                            'LLL'
-                        )}`}</sub>
-                    </div>
-                </section>
-
+                {props.order.status === 'PAYED' && (
+                    <HeaderSuccess></HeaderSuccess>
+                )}
+                {props.order.status === 'IN REVIEW' && (
+                    <HeaderInReview></HeaderInReview>
+                )}
                 <section className={styles.contentBody}>
                     <h2>{props.order.merchant.company}</h2>
                     <b>
@@ -50,8 +74,7 @@ const Component = (props: Props): JSX.Element => {
                 <Divider simple={false} />
 
                 <section className={styles.contentFooter}>
-                    <div>Payed with credit card using</div>
-                    <sub>Stripe</sub>
+                    <div>delete</div>
                 </section>
             </div>
         </div>
@@ -59,21 +82,3 @@ const Component = (props: Props): JSX.Element => {
 }
 
 export default Component
-
-const IconClock = () => (
-    <svg
-        width="38"
-        height="38"
-        viewBox="0 0 38 38"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-    >
-        <path
-            d="M13 19L17 23L25 15M37 19C37 28.9411 28.9411 37 19 37C9.05887 37 1 28.9411 1 19C1 9.05887 9.05887 1 19 1C28.9411 1 37 9.05887 37 19Z"
-            stroke="#F9FAFB"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        />
-    </svg>
-)

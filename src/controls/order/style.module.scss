@@ -11,6 +11,14 @@
     @apply text-center font-thin text-gray-50 py-8 rounded-t-lg;
 }
 
+.headerInReview {
+    sub {
+        @apply text-gray-200;
+    }
+
+    @apply bg-gray-600 text-center font-thin text-gray-50 py-8 rounded-t-lg;
+}
+
 .contentBody {
     h2 {
         font-weight: 600;
