@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import type { NextPage } from 'next'
 import { firebaseManager } from '../../../../core-lib/services/firebase.services'
-
 import Icon from '../../components/icon'
 
 interface FileUpload {
     placeholder?: string
+    icon?: JSX.Element
     extensions: Array<string>
     readonly?: boolean
     optionalParams?: any
@@ -24,6 +24,7 @@ interface FileInfo {
 
 const FileUpload: NextPage<FileUpload> = ({
     placeholder,
+    icon,
     extensions,
     readonly = false,
     optionalParams = [],
@@ -115,7 +116,7 @@ const FileUpload: NextPage<FileUpload> = ({
                 <div className="flex">
                     {!fileInfo?.fileName && (
                         <label
-                            className=" flex w-full justify-center items-center px-4 py-3 bg-white rounded-md shadow-md tracking-wide uppercase
+                            className=" flex gap-x-2 w-full justify-center items-center px-4 py-2 bg-white rounded-md shadow-md tracking-wide uppercase
                         cursor-pointer
                         hover:bg-purple-600 hover:text-white
                         text-purple-600
@@ -125,7 +126,8 @@ const FileUpload: NextPage<FileUpload> = ({
                         border border-blue
                                                 "
                         >
-                            <span className="text-base leading-normal">
+                            <Icon stroke={1} type={'ATTACH'}></Icon>
+                            <span className="text-sm font-semibold leading-normal">
                                 {placeholder}
                             </span>
 
@@ -147,13 +149,20 @@ const FileUpload: NextPage<FileUpload> = ({
                         </label>
                     )}
                     {fileInfo?.fileName && (
-                        <div className="ml-2">
-                            <div>{fileInfo.fileName}</div>
-                            <div
-                                onClick={previewFile}
-                                className="cursor-pointer"
-                            >
-                                <Icon type={'EXPAND'} stroke={1} />
+                        <div className="w-full mb-4 items-center">
+                            <div className="flex justify-between items-center">
+                                <div className="flex items-center gap-x-2">
+                                    <Icon type={'ATTACH'} stroke={1}></Icon>
+                                    <div className="text-sm font-semibold text-gray-900">
+                                        {fileInfo.fileName}
+                                    </div>
+                                </div>
+                                <div
+                                    onClick={previewFile}
+                                    className="cursor-pointer"
+                                >
+                                    <Icon type={'EXPAND'} stroke={1} />
+                                </div>
                             </div>
 
                             {!readonly && (

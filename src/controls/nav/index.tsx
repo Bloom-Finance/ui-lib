@@ -15,16 +15,11 @@ const Component = (props: Props): JSX.Element => {
     return (
         <div className={style.main}>
             <header>
-                <div
-                    className="flex items-center"
-                    onClick={() => router.push(props.route)}
-                >
-                    <Icon stroke={1} type="CHEVRON-BACK" className=""></Icon>
+                <div onClick={() => router.push(props.route)}>
+                    <Icon stroke={1} type="CHEVRON-BACK"></Icon>
                     <span>{props.label}</span>
                 </div>
-                <div>
-                    <img src={props.merchantLogo} />
-                </div>
+                <img src={props.merchantLogo} />
             </header>
         </div>
     )

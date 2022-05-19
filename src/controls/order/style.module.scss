@@ -1,43 +1,89 @@
 .card {
-    @apply p-4 bg-gray-200 flex h-screen w-screen items-center;
+    @apply px-4 py-6 bg-gray-100 min-h-screen;
+}
+
+.orderTicket {
+    @apply shadow-lg;
+}
+
+.statusIcon {
+    @apply flex justify-center;
+    svg {
+        @apply w-12 h-12;
+    }
 }
 
 .headerSuccess {
-    background: #16a34a;
-    sub {
-        @apply text-gray-200;
+    @apply bg-green-600 text-center font-thin text-gray-50 py-8 px-6 rounded-t-lg;
+    h2 {
+        @apply text-base font-semibold text-gray-50 my-2;
     }
-
-    @apply text-center font-thin text-gray-50 py-8 rounded-t-lg;
+    p {
+        @apply text-sm text-gray-200;
+    }
 }
 
 .headerInReview {
     sub {
         @apply text-gray-200;
     }
+    @apply bg-gray-600 text-center font-thin text-gray-50 py-8 px-6 rounded-t-lg;
+    h2 {
+        @apply text-base font-semibold text-gray-50 my-2;
+    }
+    p {
+        @apply text-sm text-gray-200;
+    }
+}
 
-    @apply bg-gray-600 text-center font-thin text-gray-50 py-8 rounded-t-lg;
+.headerCancelled {
+    sub {
+        @apply text-gray-200;
+    }
+    @apply bg-red-600 text-center font-thin text-gray-50 py-8 px-6 rounded-t-lg;
+    h2 {
+        @apply text-base font-semibold text-gray-50 my-2;
+    }
+    p {
+        @apply text-sm text-gray-200;
+    }
+}
+
+.headerFailed {
+    sub {
+        @apply text-gray-200;
+    }
+    @apply bg-yellow-600 text-center font-thin text-gray-50 py-8 px-6 rounded-t-lg;
+    h2 {
+        @apply text-base font-semibold text-gray-50 my-2;
+    }
+    p {
+        @apply text-sm text-gray-50;
+    }
 }
 
 .contentBody {
-    h2 {
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 150%;
+    p {
+        @apply text-sm font-semibold text-gray-900 mb-1;
     }
-
     b {
-        font-weight: 700;
-        font-size: 20px;
-        line-height: 150%;
+        @apply text-xl font-bold text-gray-900 block;
     }
-    @apply text-center text-gray-900 py-8 bg-white;
-}
-
-.contentItems {
-    @apply text-center py-8 bg-white;
+    span {
+        @apply block;
+    }
+    @apply text-center text-gray-900 pt-8 pb-6 px-6 bg-white;
 }
 
 .contentFooter {
-    @apply text-center py-8 bg-white rounded-b-lg;
+    @apply text-center py-6 px-6 bg-white rounded-b-lg;
+    span {
+        @apply text-sm text-gray-600;
+    }
+    p {
+        @apply text-sm font-semibold text-gray-900 mt-1;
+    }
+    button:last-child {
+        margin: 0;
+    }
 }
