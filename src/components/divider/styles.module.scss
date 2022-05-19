@@ -1,20 +1,17 @@
 .divider {
     height: 1px;
-    @apply w-full border-dashed bg-gray-200;
+    @apply max-w-full mx-6 border-t border-gray-200;
 }
 
 .dashed {
     width: 100%;
-    hr {
-        border-top: 5px dashed #d1d5db;
-    }
-    @apply ml-2;
+    @apply ml-2 border-dashed;
 }
 .circleLeft {
-    @apply h-5 w-5 rounded-full -m-2 bg-gray-200;
+    @apply h-5 w-5 rounded-full -m-2 bg-gray-100;
 }
 
 .circleRigth {
     background: #f9fafb;
-    @apply h-5 w-5 rounded-full -m-2  bg-gray-200;
+    @apply h-5 w-5 rounded-full -m-2  bg-gray-100;
 }

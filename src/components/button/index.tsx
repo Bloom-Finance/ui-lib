@@ -1,5 +1,6 @@
 import { MouseEventHandler } from 'react'
 import React, { FC } from 'react'
+import styles from './styles.module.scss'
 
 interface ButtonProps {
     type?: 'primary' | 'secondary' | 'warning' | 'tonal'
@@ -20,30 +21,28 @@ export const Button = ({
     const getType = () => {
         switch (type) {
             case 'primary':
-                return 'bg-black text-white'
+                return styles.primary
             case 'warning':
-                return 'bg-red-600 text-white '
+                return styles.warning
             case 'secondary':
-                return 'bg-white text-black border border-gray-300'
+                return styles.secondary
             case 'tonal':
-                return 'bg-gray-100 text-gray-900 '
+                return styles.tonal
             default:
-                return 'bg-black text-white'
+                return styles.button
         }
     }
     const getSize = () => {
         switch (size) {
             case 'large':
-                return 'p-4'
+                return styles.large
             case 'small':
-                return 'p-2'
+                return styles.small
         }
     }
 
-    let classNameBase =
-        'text-base font-semibold rounded-lg w-full flex items-center justify-center gap-x-2 '
-    classNameBase = classNameBase + getType() + getSize()
-    classNameBase = classNameBase + (disabled ? ' opacity-50' : '')
+    let classNameBase = styles.button
+    classNameBase = classNameBase + ' ' + (disabled ? styles.disabled : '')
     return (
         <button
             onClick={props.onClick}

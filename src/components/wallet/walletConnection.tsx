@@ -55,10 +55,11 @@ const WalletAuth = (props: WalletAuthProps) => {
         walletManager.onDisconnect(isAuthenticated, MoralisLogOut)
     }
     return (
-        <div className="flex flex-col">
+        <div>
             <Button
                 label="Crypto"
                 type="tonal"
+                size="small"
                 onClick={walletAuthentication}
             ></Button>
         </div>
