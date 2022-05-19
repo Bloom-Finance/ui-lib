@@ -1,0 +1,8 @@
+.main {
+    header {
+        @apply flex justify-between items-center px-4 pt-6;
+    }
+    img {
+        @apply block w-24 m-auto;
+    }
+}
