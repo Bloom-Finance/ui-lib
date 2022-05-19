@@ -1,0 +1,31 @@
+.button {
+    @apply mb-3 text-sm font-semibold rounded-lg w-full flex items-center justify-center gap-x-2;
+}
+
+.primary {
+    @apply bg-black text-white;
+}
+
+.warning {
+    @apply bg-red-600 text-white;
+}
+
+.secondary {
+    @apply bg-white text-black border border-gray-300;
+}
+
+.tonal {
+    @apply bg-gray-100 text-gray-900;
+}
+
+.large {
+    @apply p-4;
+}
+
+.small {
+    @apply p-2;
+}
+
+.disabled {
+    @apply opacity-60;
+}
