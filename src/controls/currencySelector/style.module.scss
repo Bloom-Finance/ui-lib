@@ -1,0 +1,31 @@
+.currencySelector {
+    .card {
+        @apply my-3;
+    }
+}
+
+.contentBody {
+    p {
+        @apply text-sm font-semibold text-gray-900 mb-1;
+    }
+    b {
+        @apply text-xl font-bold text-gray-900 block;
+    }
+    span {
+        @apply block;
+    }
+    @apply text-center text-gray-900 pt-8 pb-6 px-6 bg-white;
+}
+
+.contentFooter {
+    @apply text-center py-6 px-6 bg-white rounded-b-lg;
+    span {
+        @apply text-sm text-gray-600;
+    }
+    p {
+        @apply text-sm font-semibold text-gray-900 mt-1;
+    }
+    button:last-child {
+        margin: 0;
+    }
+}

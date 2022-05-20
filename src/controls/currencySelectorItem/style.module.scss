@@ -1,0 +1,25 @@
+.card {
+    @apply flex justify-between border border-gray-200 rounded-lg;
+
+    section {
+        @apply p-4;
+    }
+
+    .imageBox {
+        @apply h-8 w-8;
+    }
+
+    section:first-child {
+        @apply text-left;
+    }
+    section:nth-child(2) {
+        @apply text-right;
+    }
+    section div:first-child {
+        @apply text-sm font-semibold text-gray-900;
+    }
+
+    section div:nth-child(2) {
+        @apply text-sm text-gray-500;
+    }
+}
