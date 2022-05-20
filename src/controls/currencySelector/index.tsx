@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CurrencySelectorItem from '../currencySelectorItem'
 import { ethers } from 'ethers'
 import Divider from '../../components/divider'
 import Image from 'next/image'
 import styles from './style.module.scss'
 import { FormatterManager } from '../../../../core-lib/common/helpers/formatter'
+import Button from '../../components/button'
+import { UICheckout } from '../../../../stores/checkout.store'
 
 interface Props {
     walletBalance: Array<any>
     order: Order
+    onCurrencySelected: Function
 }
 
 const Component = (props: Props): JSX.Element => {
@@ -16,7 +19,6 @@ const Component = (props: Props): JSX.Element => {
         .map(i => i.amount)
         .reduce((acc, val) => (acc += val), 0)
 
-    console.log(props.walletBalance)
     return (
         <div className={styles.currencySelector}>
             <div className={styles.contentBody}>
@@ -35,7 +37,7 @@ const Component = (props: Props): JSX.Element => {
                 {props.walletBalance.map(wb => (
                     <div key={wb.token_address} className={styles.card}>
                         <CurrencySelectorItem
-                            key={wb.token_address}
+                            key={wb}
                             cryptoSymbol={wb.symbol}
                             cryptoIcon={<div></div>}
                             cryptoName={wb.name}
@@ -58,6 +60,7 @@ const Component = (props: Props): JSX.Element => {
                                       }
                                     : null
                             }
+                            onClick={props.onCurrencySelected}
                         ></CurrencySelectorItem>
                     </div>
                 ))}

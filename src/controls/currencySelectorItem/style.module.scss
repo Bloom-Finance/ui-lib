@@ -1,6 +1,4 @@
-.card {
-    @apply flex justify-between border border-gray-200 rounded-lg;
-
+.main {
     section {
         @apply p-4;
     }
@@ -22,4 +20,12 @@
     section div:nth-child(2) {
         @apply text-sm text-gray-500;
     }
+}
+
+.selected {
+    @apply flex justify-between border bg-gray-200 border-green-600 rounded-lg;
+}
+
+.unSelected {
+    @apply flex justify-between border border-gray-200 rounded-lg;
 }

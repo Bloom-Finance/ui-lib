@@ -45,7 +45,7 @@ export const Button = ({
     classNameBase = classNameBase + ' ' + (disabled ? styles.disabled : '')
     return (
         <button
-            onClick={props.onClick}
+            onClick={!disabled ? props.onClick : () => null}
             className={`${classNameBase} ${getType()} ${getSize()} `}
         >
             {icon}

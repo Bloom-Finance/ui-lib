@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import Tag from '../../components/tag'
 import { FormatterManager } from '../../../../core-lib/common/helpers/formatter'
 import styles from './style.module.scss'
 import Image from 'next/image'
+import { UICheckout } from '../../../../stores/checkout.store'
 interface Props {
-    key?: string
+    key?: any
     cryptoSymbol: string
     cryptoIcon: JSX.Element
     cryptoName: string
@@ -15,15 +16,28 @@ interface Props {
         color: 'green' | 'red' | 'yellow'
         message: string
     } | null
+    onClick?: Function
 }
 
 const Component = (props: Props): JSX.Element => {
+    const currencySelected = UICheckout.useState(s => s.currencySelected)
     return (
-        <div>
+        <div
+            onClick={() => {
+                props.onClick && props.onClick(props.cryptoSymbol)
+            }}
+        >
             {props.tag && (
                 <Tag label={props.tag.message} color={props.tag.color}></Tag>
             )}
-            <div key={props.key} className={styles.card}>
+            <div
+                key={props.cryptoSymbol}
+                className={`${styles.main} ${
+                    props && props.cryptoSymbol === currencySelected?.symbol
+                        ? styles.selected
+                        : styles.unSelected
+                }`}
+            >
                 <section>
                     <div className="flex items-center">
                         <div className={styles.imageBox}>
