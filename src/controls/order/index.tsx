@@ -5,7 +5,6 @@ import moment from 'moment'
 import { formatCurrency } from '@coingecko/cryptoformat'
 import Icon from '../../components/icon'
 import Button from '../../components/button'
-import WalletStatus from '../wallet/status'
 
 interface Props {
     order: Order
@@ -46,11 +45,6 @@ const Component = (props: Props): JSX.Element => {
     const HeaderInProcess = () => {
         return (
             <section className={styles.headerInReview}>
-                {/* <WalletStatus
-                    walletAddress={wm.getAddressCurrentUser()}
-                    walletIcon={wm.getWalletIcon()}
-                    onLogout={() => console.log('logout')}
-                ></WalletStatus> */}
                 <Icon
                     type={'CLOCK'}
                     stroke={1}
@@ -74,8 +68,8 @@ const Component = (props: Props): JSX.Element => {
                 ></Icon>
                 <h2>Order cancelled</h2>
                 <p>
-                    An error ocurred and your order has been cancelled.
-                    You&apos;ll be contacted by our team shortly.
+                    The order has been cancelled. You&apos;ll be contacted by
+                    our team shortly.
                 </p>
             </section>
         )
@@ -90,8 +84,8 @@ const Component = (props: Props): JSX.Element => {
                 ></Icon>
                 <h2>The payment failed</h2>
                 <p>
-                    It seems something went wrong with Stripe. Please, try
-                    again.
+                    It seems something went wrong with the blockchain. Please,
+                    try again.
                 </p>
             </section>
         )
