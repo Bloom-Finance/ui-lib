@@ -14,22 +14,19 @@ interface IWalletGuard {
 }
 const WalletGuard = ({ children, verifiedUserData }: IWalletGuard) => {
     const { isAuthenticated, isInitialized, user } = useMoralis()
-    
+
     const router = useRouter()
     useEffect(() => {
         if (isInitialized) {
             const token = getToken()
             if (isAuthenticated || token) {
-               
                 if (verifiedUserData) verifiedUserData(user, token)
             } else {
-                
                 router.replace('/')
             }
         }
     }, [isInitialized])
 
-   
     return <>{children}</>
 }
 
