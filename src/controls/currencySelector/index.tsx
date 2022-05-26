@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import CurrencySelectorItem from '../currencySelectorItem'
-import { ethers } from 'ethers'
+import { ethers, BigNumber } from 'ethers'
 import Divider from '../../components/divider'
 import Image from 'next/image'
 import styles from './style.module.scss'
@@ -11,7 +11,7 @@ import { UICheckout } from '../../../../stores/checkout.store'
 interface Props {
     walletBalance: Array<any>
     order: Order
-    onCurrencySelected: Function
+    onCurrencySelected: any
 }
 
 const Component = (props: Props): JSX.Element => {
@@ -45,7 +45,14 @@ const Component = (props: Props): JSX.Element => {
                                 wb.balance,
                                 wb.decimals
                             )}
-                            fiatAmount={12345}
+                            fiatAmount={
+                                Number(
+                                    ethers.utils.formatUnits(
+                                        wb.balance,
+                                        wb.decimals
+                                    )
+                                ) * wb.usdPrice
+                            }
                             fiatSymbol={
                                 props.order
                                     ? props.order?.merchant.bussiness_currency

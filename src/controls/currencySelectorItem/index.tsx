@@ -16,7 +16,7 @@ interface Props {
         color: 'green' | 'red' | 'yellow'
         message: string
     } | null
-    onClick?: Function
+    onClick?: any
 }
 
 const Component = (props: Props): JSX.Element => {
