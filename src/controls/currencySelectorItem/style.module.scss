@@ -27,5 +27,9 @@
 }
 
 .unSelected {
-    @apply flex justify-between border border-gray-200 rounded-lg;
+    @apply flex  justify-between border border-gray-200 rounded-lg;
+}
+
+.disabled {
+    @apply opacity-30;
 }

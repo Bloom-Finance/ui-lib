@@ -41,6 +41,16 @@ const Component = (props: Props): JSX.Element => {
                             cryptoSymbol={wb.symbol}
                             cryptoIcon={<div></div>}
                             cryptoName={wb.name}
+                            disabled={
+                                orderAmount >
+                                Number(
+                                    ethers.utils.formatUnits(
+                                        wb.balance,
+                                        wb.decimals
+                                    )
+                                ) *
+                                    wb.usdPrice
+                            }
                             cryptoAmount={ethers.utils.formatUnits(
                                 wb.balance,
                                 wb.decimals

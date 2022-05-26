@@ -12,6 +12,7 @@ interface Props {
     cryptoAmount: string
     fiatSymbol: string
     fiatAmount: number
+    disabled?: boolean
     tag?: {
         color: 'green' | 'red' | 'yellow'
         message: string
@@ -24,7 +25,9 @@ const Component = (props: Props): JSX.Element => {
     return (
         <div
             onClick={() => {
-                props.onClick && props.onClick(props.cryptoSymbol)
+                props.onClick &&
+                    !props.disabled &&
+                    props.onClick(props.cryptoSymbol)
             }}
         >
             {props.tag && (
@@ -36,7 +39,7 @@ const Component = (props: Props): JSX.Element => {
                     props && props.cryptoSymbol === currencySelected?.symbol
                         ? styles.selected
                         : styles.unSelected
-                }`}
+                } ${props.disabled && styles.disabled}`}
             >
                 <section>
                     <div className="flex items-center">
