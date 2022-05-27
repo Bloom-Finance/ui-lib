@@ -7,6 +7,7 @@ import styles from './style.module.scss'
 import { FormatterManager } from '../../../../core-lib/common/helpers/formatter'
 import Button from '../../components/button'
 import { UICheckout } from '../../../../stores/checkout.store'
+import _ from 'lodash'
 
 interface Props {
     walletBalance: Array<any>
@@ -18,7 +19,12 @@ const Component = (props: Props): JSX.Element => {
     const orderAmount = props.order.items
         .map(i => i.amount)
         .reduce((acc, val) => (acc += val), 0)
-
+    const currencyWithBalance = props.walletBalance.filter(
+        wb =>
+            orderAmount <=
+            Number(ethers.utils.formatUnits(wb.balance, wb.decimals)) *
+                wb.usdPrice
+    )
     return (
         <div className={styles.currencySelector}>
             <div className={styles.contentBody}>
@@ -33,7 +39,16 @@ const Component = (props: Props): JSX.Element => {
             <Divider simple={false} />
 
             <div className={styles.contentBody}>
-                <div>Select a currency from your balance:</div>
+                {_.isEmpty(currencyWithBalance) && (
+                    <div>
+                        You currently don&apos;t have enough balances to make
+                        the payment. Fund your wallet or select another payment
+                        method.
+                    </div>
+                )}
+                {!_.isEmpty(currencyWithBalance) && (
+                    <div>Select a currency from your balance:</div>
+                )}
                 {props.walletBalance.map(wb => (
                     <div key={wb.token_address} className={styles.card}>
                         <CurrencySelectorItem

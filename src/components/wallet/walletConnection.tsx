@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import { useMoralis } from 'react-moralis'
 import { WalletManager } from '../../../../core-lib/services/wallet.service'
 import Button from '../button'
+import Spinner from '../spinner'
 interface activeProvider {
     provider?: WalletConnectProvider
 }
@@ -47,8 +48,13 @@ const WalletAuth = (props: WalletAuthProps) => {
             enableWeb3({ provider: 'walletconnect' })
         }
     }, [isWeb3Enabled, isAuthenticated, enableWeb3])
-    if (isAuthenticating) {
-        return <div>Loading...</div>
+    if (!isAuthenticating) {
+        return (
+            <div>
+                <Spinner></Spinner>
+                <span>Go to your wallet and accept the connection</span>
+            </div>
+        )
     }
     if (activeProvider) {
         const walletManager = new WalletManager()
