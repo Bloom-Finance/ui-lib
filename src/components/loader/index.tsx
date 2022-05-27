@@ -1,15 +1,18 @@
 import { Children, MouseEventHandler } from 'react'
 import React, { FC } from 'react'
+import style from './style.module.scss'
+import Spinner from '../spinner'
 
 interface LoaderProps {
     title?: string
 }
 export const Loader = ({ title, ...props }: LoaderProps) => {
-    const classNameBase = 'h-screen flex items-center justify-center '
-
     return (
-        <div className={classNameBase}>
-            <div>{title} ... </div>
+        <div className={style.loader}>
+            <section>
+                <Spinner></Spinner>
+                <p>Loading</p>
+            </section>
         </div>
     )
 }

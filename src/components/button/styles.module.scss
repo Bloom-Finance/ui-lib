@@ -1,5 +1,8 @@
 .button {
     @apply mb-3 text-sm font-semibold rounded-lg w-full flex items-center justify-center gap-x-2;
+    svg {
+        @apply w-4 h-4;
+    }
 }
 
 .primary {

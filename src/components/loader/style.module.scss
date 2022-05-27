@@ -1,0 +1,9 @@
+.loader {
+    @apply bg-gray-100 min-h-screen w-full flex items-center justify-center;
+    section {
+        @apply text-center text-base font-semibold text-gray-500;
+        p {
+            @apply pt-4;
+        }
+    }
+}

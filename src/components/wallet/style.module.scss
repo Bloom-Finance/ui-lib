@@ -1,0 +1,6 @@
+.connectionStatus {
+    @apply bg-white border border-gray-200 text-center p-3 mb-3 rounded-lg;
+    span {
+        @apply text-sm text-gray-700 mt-2 leading-5 block;
+    }
+}

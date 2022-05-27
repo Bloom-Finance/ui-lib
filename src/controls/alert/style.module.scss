@@ -1,3 +1,15 @@
 .alert {
-    @apply bg-black p-4 w-full text-white fixed bottom-0 left-0;
+    @apply bg-black p-4 w-full text-white fixed bottom-0 left-0 flex items-start gap-x-6;
+    p {
+        @apply text-sm font-semibold text-white;
+    }
+    &.warning {
+        @apply bg-yellow-600;
+    }
+    &.success {
+        @apply bg-green-600;
+    }
+    &.error {
+        @apply bg-red-600;
+    }
 }

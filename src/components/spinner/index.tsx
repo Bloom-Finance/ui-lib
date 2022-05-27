@@ -6,7 +6,7 @@ interface Props {}
 const Component = (props: Props): JSX.Element => {
     return (
         <div>
-            <div className={style.ldsroller}>
+            <div className={style.ldsripple}>
                 <div></div>
                 <div></div>
                 <div></div>

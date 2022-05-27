@@ -40,7 +40,7 @@ const Component = (props: Props): JSX.Element => {
 
             <div className={styles.contentBody}>
                 {_.isEmpty(currencyWithBalance) && (
-                    <div>
+                    <div className={styles.balanceEmpty}>
                         You currently don&apos;t have enough balances to make
                         the payment. Fund your wallet or select another payment
                         method.
