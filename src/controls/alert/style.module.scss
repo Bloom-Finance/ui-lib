@@ -1,5 +1,5 @@
 .alert {
-    @apply bg-black p-4 w-full text-white fixed bottom-0 left-0 flex items-start gap-x-6;
+    @apply bg-black p-4 w-full text-white fixed bottom-0 left-0 flex items-start gap-x-6 flex justify-between;
     p {
         @apply text-sm font-semibold text-white;
     }

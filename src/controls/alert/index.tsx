@@ -15,14 +15,16 @@ const Component = (props: Props): JSX.Element => {
         AOS.init()
         AOS.refresh()
     }, [])
-    console.log(props.level)
+
     return (
-        <>
+        <div>
             {props.show ? (
                 <div
-                    className={`${styles.alert} ${styles[props.level]}`}
-                    data-aos="fade-up"
-                    data-aos-delay="300"
+                    className={`${styles.alert} ${styles[props.level]} ${
+                        props.show
+                            ? ' animate__animated animate__fadeIn'
+                            : 'animate__animated animate__fadeOut '
+                    }`}
                 >
                     <p>{props.message}</p>
                     <span onClick={props.onClose}>
@@ -32,7 +34,7 @@ const Component = (props: Props): JSX.Element => {
             ) : (
                 <></>
             )}
-        </>
+        </div>
     )
 }
 
