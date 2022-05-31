@@ -1,5 +1,6 @@
 import React from 'react'
 import { useMoralis } from 'react-moralis'
+import Moralis from 'moralis'
 import { FormatterManager } from '../../../../core-lib/common/helpers/formatter'
 import { WalletManager } from '../../../../core-lib/services/wallet.service'
 import Label from '../../components/label'
@@ -40,7 +41,10 @@ const Component = (props: Props): JSX.Element => {
                     color="error"
                     weight="bold"
                     type="small"
-                    onClick={async () => props.onLogout()}
+                    onClick={async () => {
+                        await Moralis.User.logOut()
+                        props.onLogout()
+                    }}
                 >
                     Disconnect
                 </Label>
