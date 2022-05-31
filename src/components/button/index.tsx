@@ -1,12 +1,14 @@
-import { MouseEventHandler } from 'react'
+import { MouseEventHandler, useState } from 'react'
 import React, { FC } from 'react'
 import styles from './styles.module.scss'
+import Spinner from '../spinner'
 
 interface ButtonProps {
     type?: 'primary' | 'secondary' | 'warning' | 'tonal'
     size?: 'large' | 'small'
     disabled?: boolean
     label: string
+    loading?: boolean
     icon?: JSX.Element
     onClick?: MouseEventHandler<HTMLButtonElement>
 }
@@ -15,6 +17,7 @@ export const Button = ({
     size = 'large',
     disabled = false,
     label,
+    loading = false,
     icon = <div></div>,
     ...props
 }: ButtonProps) => {
@@ -43,12 +46,15 @@ export const Button = ({
 
     let classNameBase = styles.button
     classNameBase = classNameBase + ' ' + (disabled ? styles.disabled : '')
+
     return (
         <button
             onClick={!disabled ? props.onClick : () => null}
             className={`${classNameBase} ${getType()} ${getSize()} `}
         >
             {icon}
+            {loading && <Spinner size={size} />}
+
             {label}
         </button>
     )

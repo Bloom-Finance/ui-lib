@@ -1,12 +1,20 @@
 import React from 'react'
 import style from './style.module.scss'
 
-interface Props {}
-
+interface Props {
+    size?: 'large' | 'small' | null
+}
 const Component = (props: Props): JSX.Element => {
+    console.log(props)
     return (
         <div>
-            <div className={style.ldsripple}>
+            <div
+                className={
+                    props.size && props.size === 'small'
+                        ? style.ldsrippleSmall
+                        : style.ldsripple
+                }
+            >
                 <div></div>
                 <div></div>
                 <div></div>
