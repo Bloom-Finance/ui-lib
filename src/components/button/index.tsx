@@ -11,6 +11,7 @@ interface ButtonProps {
     loading?: boolean
     icon?: JSX.Element
     onClick?: MouseEventHandler<HTMLButtonElement>
+    className?: string
 }
 export const Button = ({
     type = 'primary',
@@ -19,6 +20,7 @@ export const Button = ({
     label,
     loading = false,
     icon = <div></div>,
+    className = '',
     ...props
 }: ButtonProps) => {
     const getType = () => {
@@ -50,7 +52,7 @@ export const Button = ({
     return (
         <button
             onClick={!disabled ? props.onClick : () => null}
-            className={`${classNameBase} ${getType()} ${getSize()} `}
+            className={`${classNameBase} ${getType()} ${getSize()} ${className}`}
         >
             {icon}
             {loading && <Spinner size={size} />}

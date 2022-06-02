@@ -67,6 +67,7 @@ const WalletAuth = (props: WalletAuthProps) => {
                 label="Crypto"
                 type="tonal"
                 size="small"
+                className="payWithCrypto"
                 onClick={walletAuthentication}
             ></Button>
         </div>
