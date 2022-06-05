@@ -1,0 +1,77 @@
+.error {
+    @apply text-red-500;
+}
+
+.warning {
+    @apply text-yellow-800;
+}
+
+.success {
+    @apply text-green-500;
+}
+
+.textWhite {
+    @apply text-white;
+}
+
+.gray500 {
+    @apply text-gray-500;
+}
+
+.gray600 {
+    @apply text-gray-600;
+}
+
+
+.gray700 {
+    @apply text-gray-700;
+}
+
+.gray800 {
+    @apply text-gray-800;
+}
+
+.gray900 {
+    @apply text-gray-900;
+}
+
+.semiBold {
+    @apply font-semibold;
+}
+
+.bold {
+    @apply font-bold;
+}
+
+.title {
+    @apply text-3xl;
+}
+
+.subTitle {
+    @apply text-2xl;
+}
+
+.xl {
+    @apply text-xl;
+}
+
+.small {
+    @apply text-sm;
+}
+
+
+.base {
+    @apply text-base;
+}
+
+.left {
+    @apply text-left;
+}
+
+.right {
+    @apply text-right;
+}
+
+.center {
+    @apply text-center;
+}

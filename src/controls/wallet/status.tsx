@@ -13,6 +13,7 @@ interface Props {
 }
 
 const Component = (props: Props): JSX.Element => {
+    const { logout } = useMoralis()
     return (
         <div>
             <div className="px-6 py-3 items-center bg-gray-100 flex justify-between">
@@ -42,7 +43,7 @@ const Component = (props: Props): JSX.Element => {
                     weight="bold"
                     type="small"
                     onClick={async () => {
-                        await Moralis.User.logOut()
+                        await logout()
                         props.onLogout()
                     }}
                 >

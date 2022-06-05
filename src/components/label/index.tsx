@@ -1,5 +1,6 @@
 import { Children, MouseEventHandler } from 'react'
 import React, { FC } from 'react'
+import style from './styles.module.scss'
 
 interface LabelProps {
     type?: 'title' | 'subtitle' | 'small' | 'xl' | 'base'
@@ -34,78 +35,71 @@ export const Label = ({
     align,
     ...props
 }: LabelProps) => {
-    let getColor = () => {
+    const getColor = () => {
         switch (color) {
             case 'warning':
-                return 'text-yellow-800'
+                return style.warning
             case 'error':
-                return 'text-red-500'
+                return style.error
             case 'success':
-                return 'text-green-500'
+                return style.success
             case 'white':
-                return 'text-white'
+                return style.textWhite
             case 'gray-500':
-                return 'text-gray-500'
+                return style.gray500
             case 'gray-400':
-                return 'text-gray-400'
+                return style.gray400
             case 'gray-600':
-                return 'text-gray-600'
+                return style.gray600
             case 'gray-700':
-                return 'text-gray-700'
+                return style.gray700
             case 'gray-900':
-                return 'text-gray-900'
+                return style.gray900
             case 'yellow-500':
-                return 'text-yellow-500'
+                return style.yellow500
             default:
-                return 'text-gray-800'
+                return style.gray800
         }
     }
 
-    let getWeight = () => {
+    const getWeight = () => {
         switch (weight) {
             case 'semibold':
-                return 'font-semibold'
+                return style.semiBold
             case 'bold':
-                return 'font-bold'
+                return style.bold
         }
     }
 
-    let getSize = () => {
+    const getSize = () => {
         switch (type) {
             case 'title':
-                return 'text-3xl'
+                return style.title
             case 'subtitle':
-                return 'text-2xl'
+                return style.subTitle
             case 'xl':
-                return 'text-xl'
+                return style.xl
             case 'small':
-                return 'text-sm'
-            case 'base':
-                return 'text-base'
+                return style.small
             default:
-                return 'text-base'
+                return style.base
         }
     }
-    let getTextAlign = () => {
+    const getTextAlign = () => {
         switch (align) {
             case 'left':
-                return 'text-left'
+                return style.left
             case 'right':
-                return 'text-right'
+                return style.right
             default:
-                return 'text-center'
+                return style.center
         }
     }
-
-    let classNameBase = ' '
-    classNameBase = classNameBase
 
     return (
         <div
             onClick={onClick}
-            className={`${className} ${getSize()} ${getColor()} ${getWeight()} ${getTextAlign()}  ${
-                clickable && 'cursor-pointer'
-            }`}
+            className={`${className} ${getSize()} ${getColor()} ${getWeight()} ${getTextAlign()}  ${clickable} cursor-pointer`}
         >
             {text}
             {children}

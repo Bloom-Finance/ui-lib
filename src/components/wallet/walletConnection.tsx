@@ -27,12 +27,15 @@ const WalletAuth = (props: WalletAuthProps) => {
     } = useMoralis()
     const activeProvider = Moralis.Web3.activeWeb3Provider as activeProvider
     const walletAuthentication = async () => {
-        await authenticate({
-            provider: 'walletconnect',
-            signingMessage: props.signatureMessage || 'Bloom Authentication',
-            onSuccess: user => props.successfullyConnected(user),
-            onError: err => props.handleError(err)
-        })
+        if (!isAuthenticated) {
+            await authenticate({
+                provider: 'walletconnect',
+                signingMessage:
+                    props.signatureMessage || 'Bloom Authentication',
+                onSuccess: user => props.successfullyConnected(user),
+                onError: err => props.handleError(err)
+            })
+        }
     }
     const isBrowser = () => typeof window !== 'undefined'
     if (isBrowser()) {
@@ -68,7 +71,7 @@ const WalletAuth = (props: WalletAuthProps) => {
                 type="tonal"
                 size="small"
                 className="payWithCrypto"
-                onClick={walletAuthentication}
+                onClick={async () => await walletAuthentication()}
             ></Button>
         </div>
     )

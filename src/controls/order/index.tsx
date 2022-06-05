@@ -5,6 +5,7 @@ import moment from 'moment'
 import { formatCurrency } from '@coingecko/cryptoformat'
 import Icon from '../../components/icon'
 import Button from '../../components/button'
+import { useRouter } from 'next/router'
 
 interface Props {
     order: Order
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const Component = (props: Props): JSX.Element => {
+    const router = useRouter()
     const HeaderSuccess = () => {
         return (
             <section className={styles.headerSuccess}>
@@ -157,6 +159,9 @@ const Component = (props: Props): JSX.Element => {
                             <Button
                                 label={'Download receipt'}
                                 size={'small'}
+                                onClick={() =>
+                                    router.push(`/receipt/${props.order.id}`)
+                                }
                             ></Button>
                         </section>
                     </div>
