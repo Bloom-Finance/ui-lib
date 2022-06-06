@@ -70,7 +70,7 @@ const WalletAuth = (props: WalletAuthProps) => {
                 label="Crypto"
                 type="tonal"
                 size="small"
-                className="payWithCrypto"
+                data-action="payWithCrypto"
                 onClick={async () => await walletAuthentication()}
             ></Button>
         </div>
