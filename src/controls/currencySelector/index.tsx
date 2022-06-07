@@ -32,7 +32,7 @@ const Component = (props: Props): JSX.Element => {
                 <h3>
                     {FormatterManager.formatCurrency(
                         orderAmount,
-                        props.order.merchant.bussiness_currency
+                        (props.order.merchant as Merchant).bussiness_currency
                     )}
                 </h3>
             </div>
@@ -80,7 +80,8 @@ const Component = (props: Props): JSX.Element => {
                             }
                             fiatSymbol={
                                 props.order
-                                    ? props.order?.merchant.bussiness_currency
+                                    ? (props.order?.merchant as Merchant)
+                                          .bussiness_currency
                                     : 'usd'
                             }
                             tag={
