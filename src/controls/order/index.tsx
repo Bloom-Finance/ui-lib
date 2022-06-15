@@ -163,6 +163,20 @@ const Component = (props: Props): JSX.Element => {
                                     router.push(`/receipt/${props.order.id}`)
                                 }
                             ></Button>
+                            {props.order.isPreOrder && (
+                                <div>
+                                    <Button
+                                        onClick={e => {
+                                            location.href =
+                                                `${props.order.callback_url}?bloom_code=${props.order.bloom_code}` as string
+                                        }}
+                                        label={`Volver a la pagina de ${
+                                            (props.order.merchant as Merchant)
+                                                .name
+                                        }`}
+                                    />
+                                </div>
+                            )}
                         </section>
                     </div>
                 )}
