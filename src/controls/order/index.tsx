@@ -94,105 +94,116 @@ const Component = (props: Props): JSX.Element => {
     }
     return (
         <div className={styles.card}>
-            <div className={styles.orderTicket}>
-                {props.order.status === 'PAYED' && (
-                    <HeaderSuccess></HeaderSuccess>
-                )}
-                {props.order.status === 'IN REVIEW' && (
-                    <HeaderInReview></HeaderInReview>
-                )}
-                {props.order.status === 'IN PROCESS' && (
-                    <HeaderInProcess></HeaderInProcess>
-                )}
-                {props.order.status === 'CANCELLED' && (
-                    <HeaderCancelled></HeaderCancelled>
-                )}
-                {props.order.status === 'FAILED' && (
-                    <HeaderFailed></HeaderFailed>
-                )}
-                <section className={styles.contentBody}>
-                    <p>{props.order.items.map(o => o.description).join(' ')}</p>
-                    <b>
-                        {`${formatCurrency(
-                            props.order.items
-                                .map(i => i.amount)
-                                .reduce(
-                                    (prev, curr) => Number(prev) + Number(curr),
-                                    0
-                                ),
-                            'usd'
-                        )}`}
-                    </b>
-                    {props.order.status === 'IN PROCESS' && (
-                        <span>0.3042 BTC</span>
+            <div className="responsiveContainer">
+                <div className={styles.orderTicket}>
+                    {props.order.status === 'PAYED' && (
+                        <HeaderSuccess></HeaderSuccess>
                     )}
-                </section>
-                {props.order.status === 'IN REVIEW' && (
-                    <div>
-                        <Divider simple={false} />
-                        <section className={styles.contentFooter}>
-                            <span>Status:</span>
-                            <p>
-                                Our team is reviewing your proof of payment and
-                                checking the bank wire.
-                            </p>
-                        </section>
-                    </div>
-                )}
-                {props.order.status === 'IN PROCESS' && (
-                    <div>
-                        <Divider simple={false} />
-                        <section className={styles.contentFooter}>
-                            <span>Status:</span>
-                            <p>
-                                The payment is on the Bitcoin blockchain, and
-                                two more blocks are pending. We estimate it will
-                                be fully processed in 4 min.
-                            </p>
-                        </section>
-                    </div>
-                )}
-                {props.order.status === 'PAYED' && (
-                    <div>
-                        <Divider simple={false} />
-                        <section className={styles.contentFooter}>
-                            <Button
-                                label={'Download receipt'}
-                                size={'small'}
-                                onClick={() =>
-                                    router.push(`/receipt/${props.order.id}`)
-                                }
-                            ></Button>
-                            {props.order.isPreOrder && (
-                                <div>
-                                    <Button
-                                        onClick={e => {
-                                            location.href =
-                                                `${props.order.callback_url}?bloom_code=${props.order.bloom_code}` as string
-                                        }}
-                                        label={`Volver a la pagina de ${
-                                            (props.order.merchant as Merchant)
-                                                .name
-                                        }`}
-                                    />
-                                </div>
-                            )}
-                        </section>
-                    </div>
-                )}
-                {props.order.status === 'FAILED' && (
-                    <div>
-                        <Divider simple={false} />
-                        <section className={styles.contentFooter}>
-                            <Button label={'Retry'} size={'small'}></Button>
-                            <Button
-                                label={'Cancel order'}
-                                size={'small'}
-                                type={'warning'}
-                            ></Button>
-                        </section>
-                    </div>
-                )}
+                    {props.order.status === 'IN REVIEW' && (
+                        <HeaderInReview></HeaderInReview>
+                    )}
+                    {props.order.status === 'IN PROCESS' && (
+                        <HeaderInProcess></HeaderInProcess>
+                    )}
+                    {props.order.status === 'CANCELLED' && (
+                        <HeaderCancelled></HeaderCancelled>
+                    )}
+                    {props.order.status === 'FAILED' && (
+                        <HeaderFailed></HeaderFailed>
+                    )}
+                    <section className={styles.contentBody}>
+                        <p>
+                            {props.order.items
+                                .map(o => o.description)
+                                .join(' ')}
+                        </p>
+                        <b>
+                            {`${formatCurrency(
+                                props.order.items
+                                    .map(i => i.amount)
+                                    .reduce(
+                                        (prev, curr) =>
+                                            Number(prev) + Number(curr),
+                                        0
+                                    ),
+                                'usd'
+                            )}`}
+                        </b>
+                        {props.order.status === 'IN PROCESS' && (
+                            <span>0.3042 BTC</span>
+                        )}
+                    </section>
+                    {props.order.status === 'IN REVIEW' && (
+                        <div>
+                            <Divider simple={false} />
+                            <section className={styles.contentFooter}>
+                                <span>Status:</span>
+                                <p>
+                                    Our team is reviewing your proof of payment
+                                    and checking the bank wire.
+                                </p>
+                            </section>
+                        </div>
+                    )}
+                    {props.order.status === 'IN PROCESS' && (
+                        <div>
+                            <Divider simple={false} />
+                            <section className={styles.contentFooter}>
+                                <span>Status:</span>
+                                <p>
+                                    The payment is on the Bitcoin blockchain,
+                                    and two more blocks are pending. We estimate
+                                    it will be fully processed in 4 min.
+                                </p>
+                            </section>
+                        </div>
+                    )}
+                    {props.order.status === 'PAYED' && (
+                        <div>
+                            <Divider simple={false} />
+                            <section className={styles.contentFooter}>
+                                <Button
+                                    label={'Download receipt'}
+                                    size={'small'}
+                                    onClick={() =>
+                                        router.push(
+                                            `/receipt/${props.order.id}`
+                                        )
+                                    }
+                                ></Button>
+                                {props.order.isPreOrder && (
+                                    <div>
+                                        <Button
+                                            onClick={e => {
+                                                location.href =
+                                                    `${props.order.callback_url}?bloom_code=${props.order.bloom_code}` as string
+                                            }}
+                                            label={`Volver a la pagina de ${
+                                                (
+                                                    props.order
+                                                        .merchant as Merchant
+                                                ).name
+                                            }`}
+                                        />
+                                    </div>
+                                )}
+                            </section>
+                        </div>
+                    )}
+                    {props.order.status === 'FAILED' && (
+                        <div>
+                            <Divider simple={false} />
+                            <section className={styles.contentFooter}>
+                                <Button label={'Retry'} size={'small'}></Button>
+                                <Button
+                                    label={'Cancel order'}
+                                    size={'small'}
+                                    type={'warning'}
+                                ></Button>
+                            </section>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     )
