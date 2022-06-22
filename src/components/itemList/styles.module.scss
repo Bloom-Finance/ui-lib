@@ -1,0 +1,10 @@
+.itemList {
+    @apply text-base font-semibold text-gray-600;
+    &.active {
+        @apply text-base font-bold text-gray-900;
+    }
+
+    &.disabled {
+        @apply text-gray-400 font-semibold;
+    }
+}
