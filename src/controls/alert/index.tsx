@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styles from './style.module.scss'
-import AOS from 'aos'
+//import AOS from 'aos'
 import Icon from '../../components/icon'
 
 interface Props {
@@ -12,8 +12,8 @@ interface Props {
 
 const Component = (props: Props): JSX.Element => {
     useEffect(() => {
-        AOS.init()
-        AOS.refresh()
+        // AOS.init()
+        // AOS.refresh()
     }, [])
 
     return (
