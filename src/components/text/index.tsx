@@ -4,7 +4,7 @@ interface Props {
     body: string
 }
 
-export const Text = ({ body }) => {
+export const Text = ({ body }: any) => {
     return <p>{body}</p>
 }
 
