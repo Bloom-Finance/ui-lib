@@ -20,8 +20,6 @@ const Component = (props: Props): JSX.Element => {
             setBalance((await walletManager.getBalances()) as [])
         })()
     }, [])
-
-    console.log(balance)
     return (
         <div>
             {balance.map(b => (
