@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import CurrencySelectorItem from '../currencySelectorItem'
-import { ethers, BigNumber } from 'ethers'
+import { ethers } from 'ethers'
 import Divider from '../../components/divider'
-import Image from 'next/image'
 import styles from './style.module.scss'
 import { FormatterManager } from '../../../../core-lib/common/helpers/formatter'
-import Button from '../../components/button'
-import { UICheckout } from '../../../../stores/checkout.store'
 import _ from 'lodash'
 
 interface Props {
