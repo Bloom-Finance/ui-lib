@@ -5,7 +5,6 @@ interface Props {
     size?: 'large' | 'small' | null
 }
 const Component = (props: Props): JSX.Element => {
-    console.log(props)
     return (
         <div>
             <div
