@@ -2,6 +2,7 @@ import React from 'react'
 import ItemList from '../itemList'
 import styles from './styles.module.scss'
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface SidebarProps {}
 
 const Sidebar = (props: SidebarProps): JSX.Element => {
